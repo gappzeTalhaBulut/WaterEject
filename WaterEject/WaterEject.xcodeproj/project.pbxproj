@@ -19,6 +19,7 @@
 		BCBEBC472D8424980048C61D /* DBMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC462D8424980048C61D /* DBMeterView.swift */; };
 		BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */; };
 		BCBEBC502D842E840048C61D /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC4F2D842E840048C61D /* NavigationHost.swift */; };
+		BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC522D844BA20048C61D /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		BCBEBC462D8424980048C61D /* DBMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMeterView.swift; sourceTree = "<group>"; };
 		BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMeterViewModel.swift; sourceTree = "<group>"; };
 		BCBEBC4F2D842E840048C61D /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = "<group>"; };
+		BCBEBC522D844BA20048C61D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				BCBEBC4B2D842CCD0048C61D /* WaterEject */,
 				BCBEBC4C2D842CD60048C61D /* ToneGenerator */,
 				BCBEBC4D2D842CE00048C61D /* DBMeter */,
+				BCBEBC512D844B850048C61D /* Settings */,
 				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
 				BCBEBC322D82F7120048C61D /* Assets.xcassets */,
 				BCBEBC342D82F7120048C61D /* Preview Content */,
@@ -129,6 +132,14 @@
 				BCBEBC4F2D842E840048C61D /* NavigationHost.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		BCBEBC512D844B850048C61D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BCBEBC522D844BA20048C61D /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +222,7 @@
 				BCBEBC3F2D82FBB90048C61D /* WaterEjectViewModel.swift in Sources */,
 				BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */,
 				BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */,
+				BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

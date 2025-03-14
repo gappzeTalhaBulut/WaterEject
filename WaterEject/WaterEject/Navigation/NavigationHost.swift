@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct NavigationHost<Content: View>: View {
+    @State private var showingSettings = false
     let title: String
     let content: Content
     
@@ -32,13 +33,16 @@ struct NavigationHost<Content: View>: View {
                             }
                             
                             Button(action: {
-                                // Settings action
+                                showingSettings = true
                             }) {
                                 Image(systemName: "gearshape.fill")
                                     .foregroundColor(Color(uiColor: .label))
                             }
                         }
                     }
+                }
+                .sheet(isPresented: $showingSettings) {
+                    SettingsView()
                 }
         }
     }
