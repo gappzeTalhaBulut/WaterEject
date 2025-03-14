@@ -14,8 +14,8 @@ struct ToneGeneratorView: View {
     @GestureState private var dragOffset: CGFloat = 0
     
     var body: some View {
-        NavigationView {
-            ZStack {
+        NavigationHost(title: "Tone Generator") {
+                    ZStack {
                 Color(uiColor: .systemBackground).edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 30) {
@@ -62,20 +62,29 @@ struct ToneGeneratorView: View {
                     }
                     .clipShape(Rectangle())
                     
-                    // Play/Stop button remains the same
-                    Button(action: {
-                        viewModel.togglePlayback()
-                    }) {
-                        Text(viewModel.isPlaying ? "Stop playing" : "Start playing")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(uiColor: viewModel.isPlaying ? .systemRed : .systemBlue))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                    }
-                    
                     Spacer()
+
+                    VStack(spacing: 16) {
+                        Button(action: {
+                            viewModel.togglePlayback()
+                        }) {
+                            Text(viewModel.isPlaying ? "Stop playing" : "Start playing")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                                .frame(width: 200, height: 50)
+                                .background(Color(uiColor: viewModel.isPlaying ? .systemRed : .systemBlue))
+                        }
+                        .cornerRadius(25)
+
+                        Text("Swipe up and down to adjust the frequency. Press start when you find your desired frequency.")
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundColor(Color(uiColor: .secondaryLabel))
+                            .padding(.horizontal, 20)
+                    }
+                    .padding(.bottom, 20)
                 }
                 .gesture(
                     DragGesture()
@@ -86,7 +95,6 @@ struct ToneGeneratorView: View {
                         }
                 )
             }
-            .navigationTitle("Tone Generator")
         }
     }
 }

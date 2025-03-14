@@ -18,6 +18,7 @@
 		BCBEBC452D832E500048C61D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC442D832E500048C61D /* MainTabView.swift */; };
 		BCBEBC472D8424980048C61D /* DBMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC462D8424980048C61D /* DBMeterView.swift */; };
 		BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */; };
+		BCBEBC502D842E840048C61D /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC4F2D842E840048C61D /* NavigationHost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		BCBEBC442D832E500048C61D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BCBEBC462D8424980048C61D /* DBMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMeterView.swift; sourceTree = "<group>"; };
 		BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMeterViewModel.swift; sourceTree = "<group>"; };
+		BCBEBC4F2D842E840048C61D /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		BCBEBC2D2D82F7100048C61D /* WaterEject */ = {
 			isa = PBXGroup;
 			children = (
+				BCBEBC4E2D842E610048C61D /* Navigation */,
 				BCBEBC4A2D842CC10048C61D /* Application */,
 				BCBEBC4B2D842CCD0048C61D /* WaterEject */,
 				BCBEBC4C2D842CD60048C61D /* ToneGenerator */,
@@ -118,6 +121,14 @@
 				BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */,
 			);
 			path = DBMeter;
+			sourceTree = "<group>";
+		};
+		BCBEBC4E2D842E610048C61D /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				BCBEBC4F2D842E840048C61D /* NavigationHost.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +206,7 @@
 				BCBEBC472D8424980048C61D /* DBMeterView.swift in Sources */,
 				BCBEBC432D83299A0048C61D /* ToneGeneratorViewModel.swift in Sources */,
 				BCBEBC312D82F7100048C61D /* WaterEjectView.swift in Sources */,
+				BCBEBC502D842E840048C61D /* NavigationHost.swift in Sources */,
 				BCBEBC452D832E500048C61D /* MainTabView.swift in Sources */,
 				BCBEBC3F2D82FBB90048C61D /* WaterEjectViewModel.swift in Sources */,
 				BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */,

@@ -13,7 +13,7 @@ struct DBMeterView: View {
     @StateObject private var viewModel = DBMeterViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationHost(title: "dB Meter") {
             VStack(spacing: 20) {
                 Spacer()
                 
@@ -57,11 +57,12 @@ struct DBMeterView: View {
                 }
                 .padding(.top, 40)
                 
-                // Stats display
+                // Stats display with fixed dimensions
                 HStack(spacing: 40) {
                     VStack {
                         Text(String(format: "%.1f", viewModel.averageDB))
                             .font(.title2)
+                            .frame(width: 60, height: 30)
                         Text("Average")
                             .font(.caption)
                             .foregroundColor(Color(uiColor: .secondaryLabel))
@@ -70,6 +71,7 @@ struct DBMeterView: View {
                     VStack {
                         Text(String(format: "%.1f", viewModel.minDB))
                             .font(.title2)
+                            .frame(width: 60, height: 30)
                         Text("Min")
                             .font(.caption)
                             .foregroundColor(Color(uiColor: .secondaryLabel))
@@ -78,49 +80,35 @@ struct DBMeterView: View {
                     VStack {
                         Text(String(format: "%.1f", viewModel.maxDB))
                             .font(.title2)
+                            .frame(width: 60, height: 30)
                         Text("Max")
                             .font(.caption)
                             .foregroundColor(Color(uiColor: .secondaryLabel))
                     }
                 }
                 .padding(.top, 40)
-                
                 Spacer()
-                
                 VStack(spacing: 16) {
-                    // Start button
                     Button(action: {
                         viewModel.isRecording ? viewModel.stopRecording() : viewModel.startRecording()
                     }) {
                         Text(viewModel.isRecording ? "Stop" : "Start")
                             .font(.headline)
                             .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(uiColor: .systemBlue))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
+                            .frame(width: 200, height: 50)
+                            .background(viewModel.isRecording ? Color.red : Color.blue)
                     }
-                    
+                    .cornerRadius(25)
+
                     Text("Tap the Start button to begin capturing the sound levels around you.")
                         .font(.caption)
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(Color(uiColor: .secondaryLabel))
-                        .padding(.bottom, 20)
                         .padding(.horizontal, 20)
                 }
-            }
-            .navigationTitle("dB Meter")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        // Add settings action here
-                    }) {
-                        Image(systemName: "gearshape.fill")
-                    }
-                }
+                .padding(.bottom, 20)
             }
         }
     }

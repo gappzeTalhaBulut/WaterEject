@@ -13,11 +13,13 @@ struct WaterEjectView: View {
     @StateObject private var viewModel = WaterEjectViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationHost(title: "Speaker Cleaner") {
             VStack(spacing: 20) {
+
                 Text("Su Çıkarma Özelliği")
                     .font(.title)
                     .padding()
+                    .opacity(0)
                 
                 // Progress indicator
                 ZStack {
@@ -46,36 +48,40 @@ struct WaterEjectView: View {
                     }
                 }
                 .frame(width: 200, height: 200)
-                
-                Button(action: {
-                    if viewModel.isPlaying {
-                        viewModel.stopSession()
-                    } else {
-                        viewModel.startWaterEject()
+                Spacer()
+                VStack(spacing: 16) {
+                    Button(action: {
+                        if viewModel.isPlaying {
+                            viewModel.stopSession()
+                        } else {
+                            viewModel.startWaterEject()
+                        }
+                    }) {
+                        Text(viewModel.isPlaying ? "Stop" : "Start")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(width: 200, height: 50)
+                            
+                            .background(viewModel.isPlaying ? Color.red : Color.blue)
                     }
-                }) {
-                    Text(viewModel.isPlaying ? "Durdur" : "Başlat")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 50)
-                        .background(viewModel.isPlaying ? Color.red : Color.blue)
-                        .cornerRadius(25)
+                    .cornerRadius(25)
+                    
+                    Text("Note: This feature is designed to clean water from your speaker. For best results, please repeat several times.")
+                        .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(Color(uiColor: .secondaryLabel))
+                        .padding(.horizontal, 20)
                 }
-                
-                Text("Not: Bu özellik %100 garanti vermez. Cihazınızı başka yöntemlerle de kurutmaya çalışın.")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.center)
-                    .padding()
+                .padding(.bottom, 20)
             }
-            .padding()
             .onAppear {
                 // Set system volume to maximum
                 let audioSession = AVAudioSession.sharedInstance()
                 try? audioSession.setActive(true)
                 MPVolumeView.setVolume(1.0)
             }
-            .navigationTitle("Speaker Cleaner")
         }
     }
 }
