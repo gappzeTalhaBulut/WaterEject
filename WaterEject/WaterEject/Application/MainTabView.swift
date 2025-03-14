@@ -15,17 +15,20 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Cleaner", systemImage: "drop.fill")
                 }
+                .symbolEffect(.bounce, options: .repeat(1), value: true)
             
             ToneGeneratorView()
                 .tabItem {
                     Label("Tone", systemImage: "waveform")
                 }
+                .symbolEffect(.bounce, options: .repeat(1), value: true)
             
             // Add dB Meter tab
             DBMeterView()
                 .tabItem {
                     Label("dB Meter", systemImage: "speaker.wave.2")
                 }
+                .symbolEffect(.bounce, options: .repeat(1), value: true)
         }
     }
 }
