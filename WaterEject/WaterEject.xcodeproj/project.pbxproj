@@ -20,6 +20,16 @@
 		BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */; };
 		BCBEBC502D842E840048C61D /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC4F2D842E840048C61D /* NavigationHost.swift */; };
 		BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC522D844BA20048C61D /* SettingsView.swift */; };
+		BCBEBC562D888D060048C61D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC552D888D060048C61D /* FirebaseAnalytics */; };
+		BCBEBC582D888D060048C61D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC572D888D060048C61D /* FirebaseCore */; };
+		BCBEBC5A2D888D060048C61D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC592D888D060048C61D /* FirebaseCrashlytics */; };
+		BCBEBC5C2D888D060048C61D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC5B2D888D060048C61D /* FirebaseDatabase */; };
+		BCBEBC5E2D888D060048C61D /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC5D2D888D060048C61D /* FirebaseRemoteConfig */; };
+		BCBEBC612D888D2C0048C61D /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC602D888D2C0048C61D /* Adapty */; };
+		BCBEBC632D888D2C0048C61D /* AdaptyPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC622D888D2C0048C61D /* AdaptyPlugin */; };
+		BCBEBC652D888D2C0048C61D /* AdaptyUI in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC642D888D2C0048C61D /* AdaptyUI */; };
+		BCBEBC672D888D2C0048C61D /* AdaptyUITesting in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC662D888D2C0048C61D /* AdaptyUITesting */; };
+		BCBEBC6B2D888DE50048C61D /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC6A2D888DE50048C61D /* AlertKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +54,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCBEBC5A2D888D060048C61D /* FirebaseCrashlytics in Frameworks */,
+				BCBEBC652D888D2C0048C61D /* AdaptyUI in Frameworks */,
+				BCBEBC6B2D888DE50048C61D /* AlertKit in Frameworks */,
+				BCBEBC582D888D060048C61D /* FirebaseCore in Frameworks */,
+				BCBEBC672D888D2C0048C61D /* AdaptyUITesting in Frameworks */,
+				BCBEBC5C2D888D060048C61D /* FirebaseDatabase in Frameworks */,
+				BCBEBC632D888D2C0048C61D /* AdaptyPlugin in Frameworks */,
+				BCBEBC562D888D060048C61D /* FirebaseAnalytics in Frameworks */,
+				BCBEBC5E2D888D060048C61D /* FirebaseRemoteConfig in Frameworks */,
+				BCBEBC612D888D2C0048C61D /* Adapty in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +95,7 @@
 				BCBEBC4C2D842CD60048C61D /* ToneGenerator */,
 				BCBEBC4D2D842CE00048C61D /* DBMeter */,
 				BCBEBC512D844B850048C61D /* Settings */,
-				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
+				BCBEBC682D888D450048C61D /* Extension */,
 				BCBEBC322D82F7120048C61D /* Assets.xcassets */,
 				BCBEBC342D82F7120048C61D /* Preview Content */,
 			);
@@ -142,6 +162,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		BCBEBC682D888D450048C61D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,6 +186,18 @@
 			dependencies = (
 			);
 			name = WaterEject;
+			packageProductDependencies = (
+				BCBEBC552D888D060048C61D /* FirebaseAnalytics */,
+				BCBEBC572D888D060048C61D /* FirebaseCore */,
+				BCBEBC592D888D060048C61D /* FirebaseCrashlytics */,
+				BCBEBC5B2D888D060048C61D /* FirebaseDatabase */,
+				BCBEBC5D2D888D060048C61D /* FirebaseRemoteConfig */,
+				BCBEBC602D888D2C0048C61D /* Adapty */,
+				BCBEBC622D888D2C0048C61D /* AdaptyPlugin */,
+				BCBEBC642D888D2C0048C61D /* AdaptyUI */,
+				BCBEBC662D888D2C0048C61D /* AdaptyUITesting */,
+				BCBEBC6A2D888DE50048C61D /* AlertKit */,
+			);
 			productName = WaterEject;
 			productReference = BCBEBC2B2D82F7100048C61D /* WaterEject.app */;
 			productType = "com.apple.product-type.application";
@@ -186,6 +226,11 @@
 				Base,
 			);
 			mainGroup = BCBEBC222D82F7100048C61D;
+			packageReferences = (
+				BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
+				BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */,
+			);
 			productRefGroup = BCBEBC2C2D82F7100048C61D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -426,6 +471,86 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.10.0;
+			};
+		};
+		BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
+		BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/AlertKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BCBEBC552D888D060048C61D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BCBEBC572D888D060048C61D /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		BCBEBC592D888D060048C61D /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		BCBEBC5B2D888D060048C61D /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		BCBEBC5D2D888D060048C61D /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		BCBEBC602D888D2C0048C61D /* Adapty */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = Adapty;
+		};
+		BCBEBC622D888D2C0048C61D /* AdaptyPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyPlugin;
+		};
+		BCBEBC642D888D2C0048C61D /* AdaptyUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyUI;
+		};
+		BCBEBC662D888D2C0048C61D /* AdaptyUITesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyUITesting;
+		};
+		BCBEBC6A2D888DE50048C61D /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BCBEBC232D82F7100048C61D /* Project object */;
 }
