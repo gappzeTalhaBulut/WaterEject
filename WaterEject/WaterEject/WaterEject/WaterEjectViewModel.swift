@@ -31,7 +31,7 @@ class WaterEjectViewModel: ObservableObject {
         
         isPlaying = true
         progress = 0.0
-        currentPhase = "Temizlik başlatılıyor..."
+        currentPhase = "Starting cleaning..."
         
         // More gradual frequency changes with overlap
         let frequencies: [(Float, TimeInterval)] = [
@@ -68,13 +68,13 @@ class WaterEjectViewModel: ObservableObject {
             
             // Update phase description
             if self.progress < 0.25 {
-                self.currentPhase = "Düşük frekans temizliği..."
+                self.currentPhase = "Low frequency cleaning..."
             } else if self.progress < 0.5 {
-                self.currentPhase = "Orta frekans temizliği..."
+                self.currentPhase = "Mid frequency cleaning..."
             } else if self.progress < 0.75 {
-                self.currentPhase = "Yüksek frekans temizliği..."
+                self.currentPhase = "High frequency cleaning..."
             } else {
-                self.currentPhase = "Son aşama..."
+                self.currentPhase = "Final phase..."
             }
             
             if self.progress >= 1.0 {

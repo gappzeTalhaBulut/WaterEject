@@ -25,11 +25,10 @@
 		BCBEBC5A2D888D060048C61D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC592D888D060048C61D /* FirebaseCrashlytics */; };
 		BCBEBC5C2D888D060048C61D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC5B2D888D060048C61D /* FirebaseDatabase */; };
 		BCBEBC5E2D888D060048C61D /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC5D2D888D060048C61D /* FirebaseRemoteConfig */; };
-		BCBEBC612D888D2C0048C61D /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC602D888D2C0048C61D /* Adapty */; };
-		BCBEBC632D888D2C0048C61D /* AdaptyPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC622D888D2C0048C61D /* AdaptyPlugin */; };
-		BCBEBC652D888D2C0048C61D /* AdaptyUI in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC642D888D2C0048C61D /* AdaptyUI */; };
-		BCBEBC672D888D2C0048C61D /* AdaptyUITesting in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC662D888D2C0048C61D /* AdaptyUITesting */; };
 		BCBEBC6B2D888DE50048C61D /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC6A2D888DE50048C61D /* AlertKit */; };
+		BCBEBC6E2D8890C90048C61D /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC6D2D8890C90048C61D /* Adapty */; };
+		BCBEBC702D8890C90048C61D /* AdaptyPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC6F2D8890C90048C61D /* AdaptyPlugin */; };
+		BCBEBC722D8890C90048C61D /* AdaptyUI in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC712D8890C90048C61D /* AdaptyUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,16 +53,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCBEBC722D8890C90048C61D /* AdaptyUI in Frameworks */,
 				BCBEBC5A2D888D060048C61D /* FirebaseCrashlytics in Frameworks */,
-				BCBEBC652D888D2C0048C61D /* AdaptyUI in Frameworks */,
 				BCBEBC6B2D888DE50048C61D /* AlertKit in Frameworks */,
 				BCBEBC582D888D060048C61D /* FirebaseCore in Frameworks */,
-				BCBEBC672D888D2C0048C61D /* AdaptyUITesting in Frameworks */,
 				BCBEBC5C2D888D060048C61D /* FirebaseDatabase in Frameworks */,
-				BCBEBC632D888D2C0048C61D /* AdaptyPlugin in Frameworks */,
 				BCBEBC562D888D060048C61D /* FirebaseAnalytics in Frameworks */,
+				BCBEBC6E2D8890C90048C61D /* Adapty in Frameworks */,
+				BCBEBC702D8890C90048C61D /* AdaptyPlugin in Frameworks */,
 				BCBEBC5E2D888D060048C61D /* FirebaseRemoteConfig in Frameworks */,
-				BCBEBC612D888D2C0048C61D /* Adapty in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,11 +190,10 @@
 				BCBEBC592D888D060048C61D /* FirebaseCrashlytics */,
 				BCBEBC5B2D888D060048C61D /* FirebaseDatabase */,
 				BCBEBC5D2D888D060048C61D /* FirebaseRemoteConfig */,
-				BCBEBC602D888D2C0048C61D /* Adapty */,
-				BCBEBC622D888D2C0048C61D /* AdaptyPlugin */,
-				BCBEBC642D888D2C0048C61D /* AdaptyUI */,
-				BCBEBC662D888D2C0048C61D /* AdaptyUITesting */,
 				BCBEBC6A2D888DE50048C61D /* AlertKit */,
+				BCBEBC6D2D8890C90048C61D /* Adapty */,
+				BCBEBC6F2D8890C90048C61D /* AdaptyPlugin */,
+				BCBEBC712D8890C90048C61D /* AdaptyUI */,
 			);
 			productName = WaterEject;
 			productReference = BCBEBC2B2D82F7100048C61D /* WaterEject.app */;
@@ -228,8 +225,8 @@
 			mainGroup = BCBEBC222D82F7100048C61D;
 			packageReferences = (
 				BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
 				BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */,
+				BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
 			);
 			productRefGroup = BCBEBC2C2D82F7100048C61D /* Products */;
 			projectDirPath = "";
@@ -326,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -383,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -481,20 +478,20 @@
 				minimumVersion = 11.10.0;
 			};
 		};
-		BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.4.0;
-			};
-		};
 		BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparrowcode/AlertKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.1.9;
+			};
+		};
+		BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -525,30 +522,25 @@
 			package = BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		BCBEBC602D888D2C0048C61D /* Adapty */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = Adapty;
-		};
-		BCBEBC622D888D2C0048C61D /* AdaptyPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = AdaptyPlugin;
-		};
-		BCBEBC642D888D2C0048C61D /* AdaptyUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = AdaptyUI;
-		};
-		BCBEBC662D888D2C0048C61D /* AdaptyUITesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BCBEBC5F2D888D2C0048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = AdaptyUITesting;
-		};
 		BCBEBC6A2D888DE50048C61D /* AlertKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
+		};
+		BCBEBC6D2D8890C90048C61D /* Adapty */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = Adapty;
+		};
+		BCBEBC6F2D8890C90048C61D /* AdaptyPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyPlugin;
+		};
+		BCBEBC712D8890C90048C61D /* AdaptyUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
