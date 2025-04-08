@@ -32,6 +32,7 @@
 		BCCFB59C2DA51F59001E3B14 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59B2DA51F59001E3B14 /* OnboardingView.swift */; };
 		BCCFB59F2DA54F08001E3B14 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59E2DA54F08001E3B14 /* SplashView.swift */; };
 		BCCFB5A22DA55A8B001E3B14 /* StereoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5A12DA55A8B001E3B14 /* StereoView.swift */; };
+		BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB5A32DA56466001E3B14 /* music1.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		BCCFB59B2DA51F59001E3B14 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		BCCFB59E2DA54F08001E3B14 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		BCCFB5A12DA55A8B001E3B14 /* StereoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereoView.swift; sourceTree = "<group>"; };
+		BCCFB5A32DA56466001E3B14 /* music1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music1.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		BCBEBC682D888D450048C61D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BCCFB5A32DA56466001E3B14 /* music1.wav */,
 				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
 			);
 			path = Extension;
@@ -285,6 +288,7 @@
 			files = (
 				BCBEBC362D82F7120048C61D /* Preview Assets.xcassets in Resources */,
 				BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */,
+				BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

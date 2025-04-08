@@ -23,10 +23,15 @@ struct MainTabView: View {
                 }
                 .symbolEffect(.bounce, options: .repeat(1), value: true)
             
-            // Add dB Meter tab
             DBMeterView()
                 .tabItem {
                     Label("dB Meter", systemImage: "speaker.wave.2")
+                }
+                .symbolEffect(.bounce, options: .repeat(1), value: true)
+            
+            StereoView()
+                .tabItem {
+                    Label("Stereo", systemImage: "speaker.wave.3")
                 }
                 .symbolEffect(.bounce, options: .repeat(1), value: true)
         }
