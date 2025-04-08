@@ -11,7 +11,7 @@ import SwiftUI
 struct WaterEjectApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            SplashView()
                 .preferredColorScheme(.dark)
         }
     }
