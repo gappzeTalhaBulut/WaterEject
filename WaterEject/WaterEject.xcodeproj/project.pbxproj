@@ -176,8 +176,8 @@
 		BCCFB5992DA51ED4001E3B14 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BCCFB59D2DA54EF8001E3B14 /* Splash */,
 				BCBEBC4A2D842CC10048C61D /* Application */,
+				BCCFB59D2DA54EF8001E3B14 /* Splash */,
 				BCCFB59A2DA51EE2001E3B14 /* Onboarding */,
 				BCBEBC4B2D842CCD0048C61D /* WaterEject */,
 				BCBEBC4C2D842CD60048C61D /* ToneGenerator */,

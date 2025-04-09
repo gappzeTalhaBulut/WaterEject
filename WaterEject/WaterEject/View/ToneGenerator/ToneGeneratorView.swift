@@ -68,7 +68,7 @@ struct ToneGeneratorView: View {
                         Button(action: {
                             viewModel.togglePlayback()
                         }) {
-                            Text(viewModel.isPlaying ? "Stop playing" : "Start playing")
+                            Text(viewModel.isPlaying ? "Stop" : "Start")
                                 .foregroundColor(.white)
                                 .font(.headline)
                                 .frame(width: 200, height: 50)

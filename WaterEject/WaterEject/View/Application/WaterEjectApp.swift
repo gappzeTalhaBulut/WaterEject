@@ -12,7 +12,7 @@ struct WaterEjectApp: App {
     var body: some Scene {
         WindowGroup {
             SplashView()
-                .preferredColorScheme(.dark)
+                //.preferredColorScheme(.dark)
         }
     }
 }
