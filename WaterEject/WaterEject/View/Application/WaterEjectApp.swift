@@ -9,10 +9,35 @@ import SwiftUI
 
 @main
 struct WaterEjectApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var navigationManager = NavigationManager.shared
+    
     var body: some Scene {
         WindowGroup {
-            SplashView()
-                //.preferredColorScheme(.dark)
+            ContentView()
+                .environmentObject(navigationManager)
         }
+    }
+}
+
+struct ContentView: View {
+    @EnvironmentObject var navigationManager: NavigationManager
+    
+    var body: some View {
+        Group {
+            switch navigationManager.currentState {
+            case .splash:
+                SplashView()
+                    .adaptyPaywall()
+            case .home:
+                MainTabView()
+                    .transition(.opacity.combined(with: .move(edge: .trailing)))
+            case .intro:
+                OnboardingView()
+            case .paywall:
+                Color.clear
+            }
+        }
+        .animation(.default, value: navigationManager.currentState)
     }
 }

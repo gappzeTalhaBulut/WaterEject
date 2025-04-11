@@ -82,6 +82,7 @@ struct StereoView: View {
                                     .stroke(isRightSpeakerActive ? Color.blue : Color.gray, lineWidth: 1)
                             )
                     }
+                    .padding(.top)
                     
                     // Hoparlör ikonları
                     HStack(spacing: 60) {

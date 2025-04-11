@@ -18,7 +18,7 @@
 		BCBEBC452D832E500048C61D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC442D832E500048C61D /* MainTabView.swift */; };
 		BCBEBC472D8424980048C61D /* DBMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC462D8424980048C61D /* DBMeterView.swift */; };
 		BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */; };
-		BCBEBC502D842E840048C61D /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC4F2D842E840048C61D /* NavigationHost.swift */; };
+		BCBEBC502D842E840048C61D /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC4F2D842E840048C61D /* NavigationBar.swift */; };
 		BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC522D844BA20048C61D /* SettingsView.swift */; };
 		BCBEBC562D888D060048C61D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC552D888D060048C61D /* FirebaseAnalytics */; };
 		BCBEBC582D888D060048C61D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = BCBEBC572D888D060048C61D /* FirebaseCore */; };
@@ -33,6 +33,29 @@
 		BCCFB59F2DA54F08001E3B14 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB59E2DA54F08001E3B14 /* SplashView.swift */; };
 		BCCFB5A22DA55A8B001E3B14 /* StereoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5A12DA55A8B001E3B14 /* StereoView.swift */; };
 		BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB5A32DA56466001E3B14 /* music1.wav */; };
+		BCCFB5A72DA866C7001E3B14 /* AdaptyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5A62DA866C7001E3B14 /* AdaptyService.swift */; };
+		BCCFB5A92DA86708001E3B14 /* PaywallStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5A82DA86708001E3B14 /* PaywallStartView.swift */; };
+		BCCFB5AB2DA8672A001E3B14 /* AppPaywallAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5AA2DA8672A001E3B14 /* AppPaywallAction.swift */; };
+		BCCFB5AD2DA86758001E3B14 /* PaywallRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5AC2DA86758001E3B14 /* PaywallRepository.swift */; };
+		BCCFB5B02DA86828001E3B14 /* AppStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5AF2DA86827001E3B14 /* AppStorageManager.swift */; };
+		BCCFB5B42DA86972001E3B14 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5B32DA86972001E3B14 /* NetworkService.swift */; };
+		BCCFB5B72DA869A2001E3B14 /* SmartServiceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5B62DA869A2001E3B14 /* SmartServiceRouter.swift */; };
+		BCCFB5BA2DA86A4D001E3B14 /* AppOpenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5B92DA86A4D001E3B14 /* AppOpenResponse.swift */; };
+		BCCFB5BF2DA92F83001E3B14 /* RemoteConfigKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5BE2DA92F83001E3B14 /* RemoteConfigKey.swift */; };
+		BCCFB5C12DA92FB4001E3B14 /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5C02DA92FB4001E3B14 /* RemoteConfigManager.swift */; };
+		BCCFB5C32DA92FDE001E3B14 /* ConfigKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5C22DA92FDE001E3B14 /* ConfigKey.swift */; };
+		BCCFB5C52DA92FF3001E3B14 /* RemoteConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5C42DA92FF3001E3B14 /* RemoteConfigProtocol.swift */; };
+		BCCFB5C82DA9302E001E3B14 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5C72DA9302E001E3B14 /* AppConfig.swift */; };
+		BCCFB5CA2DA93070001E3B14 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5C92DA93070001E3B14 /* Config.swift */; };
+		BCCFB5CD2DA9338F001E3B14 /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5CC2DA9338F001E3B14 /* LogHelper.swift */; };
+		BCCFB5CF2DA9340B001E3B14 /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5CE2DA9340B001E3B14 /* UIDevice+Ext.swift */; };
+		BCCFB5D12DA93553001E3B14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5D02DA93553001E3B14 /* AppDelegate.swift */; };
+		BCCFB5D42DA935F2001E3B14 /* LoadableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5D32DA935F2001E3B14 /* LoadableManager.swift */; };
+		BCCFB5D62DA9368A001E3B14 /* FirebaseLoadableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5D52DA9368A001E3B14 /* FirebaseLoadableStrategy.swift */; };
+		BCCFB5D92DA936DC001E3B14 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5D82DA936DC001E3B14 /* KeychainRepository.swift */; };
+		BCCFB5DC2DA9371A001E3B14 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB5DB2DA9371A001E3B14 /* KeychainSwift */; };
+		BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */; };
+		BCCFB5E02DA94153001E3B14 /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,12 +71,34 @@
 		BCBEBC442D832E500048C61D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BCBEBC462D8424980048C61D /* DBMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMeterView.swift; sourceTree = "<group>"; };
 		BCBEBC482D8424AB0048C61D /* DBMeterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMeterViewModel.swift; sourceTree = "<group>"; };
-		BCBEBC4F2D842E840048C61D /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = "<group>"; };
+		BCBEBC4F2D842E840048C61D /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		BCBEBC522D844BA20048C61D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BCCFB59B2DA51F59001E3B14 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		BCCFB59E2DA54F08001E3B14 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		BCCFB5A12DA55A8B001E3B14 /* StereoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereoView.swift; sourceTree = "<group>"; };
 		BCCFB5A32DA56466001E3B14 /* music1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music1.wav; sourceTree = "<group>"; };
+		BCCFB5A62DA866C7001E3B14 /* AdaptyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptyService.swift; sourceTree = "<group>"; };
+		BCCFB5A82DA86708001E3B14 /* PaywallStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallStartView.swift; sourceTree = "<group>"; };
+		BCCFB5AA2DA8672A001E3B14 /* AppPaywallAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPaywallAction.swift; sourceTree = "<group>"; };
+		BCCFB5AC2DA86758001E3B14 /* PaywallRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallRepository.swift; sourceTree = "<group>"; };
+		BCCFB5AF2DA86827001E3B14 /* AppStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageManager.swift; sourceTree = "<group>"; };
+		BCCFB5B32DA86972001E3B14 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		BCCFB5B62DA869A2001E3B14 /* SmartServiceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartServiceRouter.swift; sourceTree = "<group>"; };
+		BCCFB5B92DA86A4D001E3B14 /* AppOpenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenResponse.swift; sourceTree = "<group>"; };
+		BCCFB5BE2DA92F83001E3B14 /* RemoteConfigKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigKey.swift; sourceTree = "<group>"; };
+		BCCFB5C02DA92FB4001E3B14 /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
+		BCCFB5C22DA92FDE001E3B14 /* ConfigKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigKey.swift; sourceTree = "<group>"; };
+		BCCFB5C42DA92FF3001E3B14 /* RemoteConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigProtocol.swift; sourceTree = "<group>"; };
+		BCCFB5C72DA9302E001E3B14 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		BCCFB5C92DA93070001E3B14 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		BCCFB5CC2DA9338F001E3B14 /* LogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelper.swift; sourceTree = "<group>"; };
+		BCCFB5CE2DA9340B001E3B14 /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
+		BCCFB5D02DA93553001E3B14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BCCFB5D32DA935F2001E3B14 /* LoadableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableManager.swift; sourceTree = "<group>"; };
+		BCCFB5D52DA9368A001E3B14 /* FirebaseLoadableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoadableStrategy.swift; sourceTree = "<group>"; };
+		BCCFB5D82DA936DC001E3B14 /* KeychainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
+		BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +108,7 @@
 			files = (
 				BCBEBC722D8890C90048C61D /* AdaptyUI in Frameworks */,
 				BCBEBC5A2D888D060048C61D /* FirebaseCrashlytics in Frameworks */,
+				BCCFB5DC2DA9371A001E3B14 /* KeychainSwift in Frameworks */,
 				BCBEBC6B2D888DE50048C61D /* AlertKit in Frameworks */,
 				BCBEBC582D888D060048C61D /* FirebaseCore in Frameworks */,
 				BCBEBC5C2D888D060048C61D /* FirebaseDatabase in Frameworks */,
@@ -95,9 +141,18 @@
 		BCBEBC2D2D82F7100048C61D /* WaterEject */ = {
 			isa = PBXGroup;
 			children = (
-				BCBEBC4E2D842E610048C61D /* Navigation */,
 				BCCFB5992DA51ED4001E3B14 /* View */,
+				BCBEBC4E2D842E610048C61D /* Navigation */,
+				BCCFB5D22DA935E1001E3B14 /* Loadable */,
+				BCCFB5D72DA936C6001E3B14 /* Keychain */,
+				BCCFB5CB2DA93381001E3B14 /* Helper */,
+				BCCFB5C62DA93021001E3B14 /* Constant */,
+				BCCFB5BB2DA92F4F001E3B14 /* RemoteConfig */,
+				BCCFB5B12DA86959001E3B14 /* Network */,
+				BCCFB5AE2DA86816001E3B14 /* Manager */,
+				BCCFB5A52DA866B9001E3B14 /* Adapty */,
 				BCBEBC682D888D450048C61D /* Extension */,
+				BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */,
 				BCBEBC322D82F7120048C61D /* Assets.xcassets */,
 				BCBEBC342D82F7120048C61D /* Preview Content */,
 			);
@@ -115,6 +170,7 @@
 		BCBEBC4A2D842CC10048C61D /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				BCCFB5D02DA93553001E3B14 /* AppDelegate.swift */,
 				BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */,
 				BCBEBC442D832E500048C61D /* MainTabView.swift */,
 			);
@@ -151,7 +207,8 @@
 		BCBEBC4E2D842E610048C61D /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				BCBEBC4F2D842E840048C61D /* NavigationHost.swift */,
+				BCBEBC4F2D842E840048C61D /* NavigationBar.swift */,
+				BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -169,6 +226,7 @@
 			children = (
 				BCCFB5A32DA56466001E3B14 /* music1.wav */,
 				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
+				BCCFB5CE2DA9340B001E3B14 /* UIDevice+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -212,6 +270,120 @@
 			path = Stereo;
 			sourceTree = "<group>";
 		};
+		BCCFB5A52DA866B9001E3B14 /* Adapty */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5A62DA866C7001E3B14 /* AdaptyService.swift */,
+				BCCFB5A82DA86708001E3B14 /* PaywallStartView.swift */,
+				BCCFB5AA2DA8672A001E3B14 /* AppPaywallAction.swift */,
+				BCCFB5AC2DA86758001E3B14 /* PaywallRepository.swift */,
+			);
+			path = Adapty;
+			sourceTree = "<group>";
+		};
+		BCCFB5AE2DA86816001E3B14 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5AF2DA86827001E3B14 /* AppStorageManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		BCCFB5B12DA86959001E3B14 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5B82DA86A39001E3B14 /* Response */,
+				BCCFB5B52DA86998001E3B14 /* Router */,
+				BCCFB5B22DA86962001E3B14 /* Core */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BCCFB5B22DA86962001E3B14 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5B32DA86972001E3B14 /* NetworkService.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BCCFB5B52DA86998001E3B14 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5B62DA869A2001E3B14 /* SmartServiceRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		BCCFB5B82DA86A39001E3B14 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5B92DA86A4D001E3B14 /* AppOpenResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		BCCFB5BB2DA92F4F001E3B14 /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5BD2DA92F64001E3B14 /* Firebase */,
+				BCCFB5BC2DA92F60001E3B14 /* Base */,
+			);
+			path = RemoteConfig;
+			sourceTree = "<group>";
+		};
+		BCCFB5BC2DA92F60001E3B14 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5C22DA92FDE001E3B14 /* ConfigKey.swift */,
+				BCCFB5C42DA92FF3001E3B14 /* RemoteConfigProtocol.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		BCCFB5BD2DA92F64001E3B14 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5BE2DA92F83001E3B14 /* RemoteConfigKey.swift */,
+				BCCFB5C02DA92FB4001E3B14 /* RemoteConfigManager.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		BCCFB5C62DA93021001E3B14 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5C72DA9302E001E3B14 /* AppConfig.swift */,
+				BCCFB5C92DA93070001E3B14 /* Config.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		BCCFB5CB2DA93381001E3B14 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5CC2DA9338F001E3B14 /* LogHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		BCCFB5D22DA935E1001E3B14 /* Loadable */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5D32DA935F2001E3B14 /* LoadableManager.swift */,
+				BCCFB5D52DA9368A001E3B14 /* FirebaseLoadableStrategy.swift */,
+			);
+			path = Loadable;
+			sourceTree = "<group>";
+		};
+		BCCFB5D72DA936C6001E3B14 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5D82DA936DC001E3B14 /* KeychainRepository.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,6 +410,7 @@
 				BCBEBC6D2D8890C90048C61D /* Adapty */,
 				BCBEBC6F2D8890C90048C61D /* AdaptyPlugin */,
 				BCBEBC712D8890C90048C61D /* AdaptyUI */,
+				BCCFB5DB2DA9371A001E3B14 /* KeychainSwift */,
 			);
 			productName = WaterEject;
 			productReference = BCBEBC2B2D82F7100048C61D /* WaterEject.app */;
@@ -271,6 +444,7 @@
 				BCBEBC542D888D060048C61D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */,
 				BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
+				BCCFB5DA2DA9371A001E3B14 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = BCBEBC2C2D82F7100048C61D /* Products */;
 			projectDirPath = "";
@@ -287,6 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCBEBC362D82F7120048C61D /* Preview Assets.xcassets in Resources */,
+				BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */,
 				BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */,
 				BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */,
 			);
@@ -299,20 +474,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCCFB5C82DA9302E001E3B14 /* AppConfig.swift in Sources */,
+				BCCFB5BA2DA86A4D001E3B14 /* AppOpenResponse.swift in Sources */,
 				BCCFB5A22DA55A8B001E3B14 /* StereoView.swift in Sources */,
+				BCCFB5CD2DA9338F001E3B14 /* LogHelper.swift in Sources */,
 				BCBEBC412D8328E10048C61D /* ToneGeneratorView.swift in Sources */,
 				BCBEBC3D2D82FB700048C61D /* AudioEngine.swift in Sources */,
 				BCBEBC472D8424980048C61D /* DBMeterView.swift in Sources */,
+				BCCFB5A92DA86708001E3B14 /* PaywallStartView.swift in Sources */,
+				BCCFB5B02DA86828001E3B14 /* AppStorageManager.swift in Sources */,
+				BCCFB5D92DA936DC001E3B14 /* KeychainRepository.swift in Sources */,
+				BCCFB5E02DA94153001E3B14 /* NavigationHost.swift in Sources */,
 				BCBEBC432D83299A0048C61D /* ToneGeneratorViewModel.swift in Sources */,
 				BCBEBC312D82F7100048C61D /* WaterEjectView.swift in Sources */,
-				BCBEBC502D842E840048C61D /* NavigationHost.swift in Sources */,
+				BCBEBC502D842E840048C61D /* NavigationBar.swift in Sources */,
 				BCBEBC452D832E500048C61D /* MainTabView.swift in Sources */,
+				BCCFB5B42DA86972001E3B14 /* NetworkService.swift in Sources */,
+				BCCFB5B72DA869A2001E3B14 /* SmartServiceRouter.swift in Sources */,
 				BCBEBC3F2D82FBB90048C61D /* WaterEjectViewModel.swift in Sources */,
 				BCCFB59F2DA54F08001E3B14 /* SplashView.swift in Sources */,
+				BCCFB5CF2DA9340B001E3B14 /* UIDevice+Ext.swift in Sources */,
 				BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */,
+				BCCFB5CA2DA93070001E3B14 /* Config.swift in Sources */,
+				BCCFB5D62DA9368A001E3B14 /* FirebaseLoadableStrategy.swift in Sources */,
 				BCCFB59C2DA51F59001E3B14 /* OnboardingView.swift in Sources */,
+				BCCFB5C12DA92FB4001E3B14 /* RemoteConfigManager.swift in Sources */,
+				BCCFB5D12DA93553001E3B14 /* AppDelegate.swift in Sources */,
+				BCCFB5A72DA866C7001E3B14 /* AdaptyService.swift in Sources */,
+				BCCFB5AD2DA86758001E3B14 /* PaywallRepository.swift in Sources */,
+				BCCFB5AB2DA8672A001E3B14 /* AppPaywallAction.swift in Sources */,
+				BCCFB5C32DA92FDE001E3B14 /* ConfigKey.swift in Sources */,
 				BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */,
+				BCCFB5C52DA92FF3001E3B14 /* RemoteConfigProtocol.swift in Sources */,
 				BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */,
+				BCCFB5BF2DA92F83001E3B14 /* RemoteConfigKey.swift in Sources */,
+				BCCFB5D42DA935F2001E3B14 /* LoadableManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,9 +639,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterEject/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -458,8 +655,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.WaterEject;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -471,9 +669,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterEject/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -486,8 +685,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.WaterEject;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -542,6 +742,14 @@
 				minimumVersion = 3.4.0;
 			};
 		};
+		BCCFB5DA2DA9371A001E3B14 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -589,6 +797,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
 			productName = AdaptyUI;
+		};
+		BCCFB5DB2DA9371A001E3B14 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCCFB5DA2DA9371A001E3B14 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

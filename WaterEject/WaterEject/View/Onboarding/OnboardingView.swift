@@ -17,6 +17,7 @@ struct OnboardingPage: Identifiable {
 
 struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @EnvironmentObject private var navigationManager: NavigationManager
     @State private var currentPage = 0
     
     let pages: [OnboardingPage] = [
@@ -73,14 +74,14 @@ struct OnboardingView: View {
                 
                 Button(action: {
                     if currentPage == pages.count - 1 {
-                        hasCompletedOnboarding = true
+                        completedOnboarding()
                     } else {
                         withAnimation {
                             currentPage += 1
                         }
                     }
                 }) {
-                    Text("Continue")
+                    Text(currentPage == pages.count - 1 ? "Get Started" : "Continue")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -92,6 +93,38 @@ struct OnboardingView: View {
                 .padding(.bottom, 50)
             }
         }
+        .navigationBarHidden(true)
+    }
+    
+    private func completedOnboarding() {
+        hasCompletedOnboarding = true
+        
+        // Önce paywall göster
+        Task {
+            await PaywallRepository.shared.openPaywallIfEnabled(
+                action: .onboarding,
+                isNotVisibleAction: {
+                    // Paywall gösterilmeyecekse direkt ana ekrana geç
+                    navigateToHome()
+                },
+                onCloseAction: {
+                    // Paywall kapatılırsa ana ekrana geç
+                    navigateToHome()
+                },
+                onPurchaseSuccess: {
+                    // Başarılı satın alma sonrası ana ekrana geç
+                    navigateToHome()
+                },
+                onRestoreSuccess: {
+                    // Başarılı restore sonrası ana ekrana geç
+                    navigateToHome()
+                }
+            )
+        }
+    }
+    
+    private func navigateToHome() {
+        navigationManager.navigate(to: .home)
     }
 }
 
