@@ -10,15 +10,28 @@ import UserNotifications
 
 struct DayIndicator: Identifiable, Codable {
     let id: UUID
-    let day: Int
+    let day: Int  // 1-7 arası gün numarası
     var isCompleted: Bool
     var date: Date
 }
 
+class CleaningProgress: ObservableObject {
+    static let shared = CleaningProgress()
+    @Published var lastCleaningDate: Date?
+    @Published var shouldRefreshDays: Bool = false
+    
+    func markDayAsCompleted() {
+        lastCleaningDate = Date()
+        shouldRefreshDays = true
+    }
+}
+
 struct SevenDayCleaningView: View {
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject private var cleaningProgress: CleaningProgress
     private let appStorage: AppStorageManager
     @State private var days: [DayIndicator] = []
+    @State private var showFeedback: Bool = false
     
     init(appStorage: AppStorageManager = AppStorageManager()) {
         self.appStorage = appStorage
@@ -81,6 +94,15 @@ struct SevenDayCleaningView: View {
         .cornerRadius(12)
         .onAppear {
             loadDays()
+            requestNotificationPermission()
+        }
+        .onChange(of: cleaningProgress.lastCleaningDate) { _ in
+            markDayAsCompletedAfterCleaning()
+        }
+        .alert("Day Completed!", isPresented: $showFeedback) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Great! You've completed today's cleaning task.")
         }
     }
     
@@ -88,13 +110,13 @@ struct SevenDayCleaningView: View {
         if let savedDays = try? JSONDecoder().decode([DayIndicator].self, from: appStorage.cleaningDaysData) {
             days = savedDays
         } else {
-            // İlk kez oluşturuluyorsa
+            // İlk kez oluşturuluyorsa, 7 günlük plan oluştur
             days = (1...7).map { day in
                 DayIndicator(
                     id: UUID(),
                     day: day,
                     isCompleted: false,
-                    date: Calendar.current.date(byAdding: .day, value: day - 1, to: Date()) ?? Date()
+                    date: Date()
                 )
             }
             saveDays()
@@ -107,34 +129,93 @@ struct SevenDayCleaningView: View {
         }
     }
     
-    func markDayAsCompleted(day: Int) {
-        if let index = days.firstIndex(where: { $0.day == day }) {
-            days[index].isCompleted = true
-            saveDays()
-            
-            // Push notification'ı planla
-            schedulePushNotification(forDay: days[index].date)
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("Notification permission granted")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
         }
     }
     
+    private func markDayAsCompletedAfterCleaning() {
+        // Find the current active day
+        let currentDay = getCurrentActiveDay()
+        if let index = days.firstIndex(where: { $0.day == currentDay }) {
+            if !days[index].isCompleted {
+                days[index].isCompleted = true
+                days[index].date = Date() // Save completion date
+                saveDays()
+                showFeedback = true
+                
+                // Only schedule next notification if we haven't completed all 7 days
+                if !days.allSatisfy({ $0.isCompleted }) {
+                    schedulePushNotification(forDay: days[index].date)
+                }
+            }
+        }
+    }
+    
+    private func getCurrentActiveDay() -> Int {
+        // If no days are completed, return day 1
+        if !days.contains(where: { $0.isCompleted }) {
+            return 1
+        }
+        
+        // Find the last completed day
+        if let lastCompletedDay = days.filter({ $0.isCompleted })
+            .sorted(by: { $0.date > $1.date })
+            .first {
+            
+            // Check if 24 hours have passed since the last completion
+            if let daysPassed = Calendar.current.dateComponents([.hour],
+                from: lastCompletedDay.date,
+                to: Date()).hour,
+               daysPassed >= 24 {
+                
+                // Find the next uncompleted day
+                if let nextDay = days.first(where: { !$0.isCompleted })?.day {
+                    return nextDay
+                }
+            }
+            
+            // If 24 hours haven't passed, return the current day
+            return lastCompletedDay.day
+        }
+        
+        return 1 // Default to day 1 if something goes wrong
+    }
+    
     private func schedulePushNotification(forDay date: Date) {
+        // Don't schedule if all days are completed
+        if days.allSatisfy({ $0.isCompleted }) {
+            return
+        }
+        
         let content = UNMutableNotificationContent()
         content.title = "Water Eject Cleaning"
         content.body = "Time to clean your device's speaker! Complete today's cleaning task."
         content.sound = .default
         
-        // Bir sonraki gün için bildirim
-        let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: date) ?? date
-        let components = Calendar.current.dateComponents([.hour, .minute], from: nextDay)
+        // Schedule for 24 hours from now
+        let nextDate = Calendar.current.date(byAdding: .hour, value: 24, to: date) ?? date
+        let components = Calendar.current.dateComponents([.hour, .minute], from: nextDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         
         let request = UNNotificationRequest(
-            identifier: "cleaning-reminder",
+            identifier: "cleaning-reminder-\(UUID().uuidString)",
             content: content,
             trigger: trigger
         )
         
-        UNUserNotificationCenter.current().add(request)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling next day notification: \(error)")
+            } else {
+                print("Next day notification scheduled successfully")
+            }
+        }
     }
 }
 
@@ -173,7 +254,7 @@ struct DayCircleView: View {
                 .strokeBorder(borderColor, lineWidth: isCompleted ? 3 : 1)
                 .background(Circle().fill(circleColor))
                 .frame(width: 40, height: 40)
-                .shadow(color: isCompleted ? .blue.opacity(0.3) : .clear, radius: 4)
+                //.shadow(color: isCompleted ? .blue.opacity(0.3) : .clear, radius: 4)
             
             VStack(spacing: 2) {
                 Text("\(day)")
@@ -187,34 +268,42 @@ struct DayCircleView: View {
 
 #Preview {
     Group {
-        // Dark mode preview
-        VStack {
-            SevenDayCleaningView()
-                .padding()
+        // Dark mode preview with sample data
+        VStack(spacing: 20) {
+            // Test Case 1: İlk 3 gün tamamlanmış
+            SevenDayCleaningView(appStorage: PreviewAppStorage(days: [
+                DayIndicator(id: UUID(), day: 1, isCompleted: true, date: Date()),
+                DayIndicator(id: UUID(), day: 2, isCompleted: true, date: Date()),
+                DayIndicator(id: UUID(), day: 3, isCompleted: true, date: Date()),
+                DayIndicator(id: UUID(), day: 4, isCompleted: false, date: Date()),
+                DayIndicator(id: UUID(), day: 5, isCompleted: false, date: Date()),
+                DayIndicator(id: UUID(), day: 6, isCompleted: false, date: Date()),
+                DayIndicator(id: UUID(), day: 7, isCompleted: false, date: Date())
+            ]))
+            .padding()
             
-            HStack(spacing: 12) {
-                DayCircleView(day: 1, isCompleted: false, colorScheme: .dark)
-                DayCircleView(day: 2, isCompleted: true, colorScheme: .dark)
-            }
+            // Test Case 2: Rastgele günler tamamlanmış
+            SevenDayCleaningView(appStorage: PreviewAppStorage(days: [
+                DayIndicator(id: UUID(), day: 1, isCompleted: true, date: Date()),
+                DayIndicator(id: UUID(), day: 2, isCompleted: false, date: Date()),
+                DayIndicator(id: UUID(), day: 3, isCompleted: true, date: Date()),
+                DayIndicator(id: UUID(), day: 4, isCompleted: false, date: Date()),
+                DayIndicator(id: UUID(), day: 5, isCompleted: true, date: Date()),
+                DayIndicator(id: UUID(), day: 6, isCompleted: false, date: Date()),
+                DayIndicator(id: UUID(), day: 7, isCompleted: false, date: Date())
+            ]))
             .padding()
         }
         .frame(maxWidth: .infinity)
-        .background(Color.black)
-        .environment(\.colorScheme, .dark)
-        
-        // Light mode preview
-        VStack {
-            SevenDayCleaningView()
-                .padding()
-            
-            HStack(spacing: 12) {
-                DayCircleView(day: 1, isCompleted: false, colorScheme: .light)
-                DayCircleView(day: 2, isCompleted: true, colorScheme: .light)
-            }
-            .padding()
+        .background(Color(.systemBackground))
+    }
+}
+
+class PreviewAppStorage: AppStorageManager {
+    init(days: [DayIndicator]) {
+        super.init()
+        if let encoded = try? JSONEncoder().encode(days) {
+            self.cleaningDaysData = encoded
         }
-        .frame(maxWidth: .infinity)
-        .background(Color.white)
-        .environment(\.colorScheme, .light)
     }
 }

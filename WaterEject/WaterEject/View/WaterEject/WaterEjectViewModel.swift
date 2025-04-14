@@ -16,9 +16,12 @@ class WaterEjectViewModel: ObservableObject {
     private let audioEngine = AudioEngine()
     private var progressTimer: Timer?
     private let appStorage: AppStorageManager
+    private let cleaningProgress: CleaningProgress
     
-    init(appStorage: AppStorageManager = AppStorageManager()) {
+    init(appStorage: AppStorageManager = AppStorageManager(),
+         cleaningProgress: CleaningProgress = .shared) {
         self.appStorage = appStorage
+        self.cleaningProgress = cleaningProgress
         
         audioEngine.onPlaybackComplete = { [weak self] in
             DispatchQueue.main.async {
@@ -81,68 +84,14 @@ class WaterEjectViewModel: ObservableObject {
             }
             
             if self.progress >= 1.0 {
-                self.stopSession()
-                // Cleaning completed, mark the day
                 self.cleaningCompleted()
+                self.stopSession()
             }
         }
     }
     
     private func cleaningCompleted() {
-        markCurrentDayAsCompleted()
-        schedulePushNotificationForNextDay()
-        incrementCurrentDay()
-    }
-    
-    private func markCurrentDayAsCompleted() {
-        if var savedDays = try? JSONDecoder().decode([DayIndicator].self, from: appStorage.cleaningDaysData) {
-            if let index = savedDays.firstIndex(where: { $0.day == getCurrentDay() }) {
-                savedDays[index].isCompleted = true
-                if let encoded = try? JSONEncoder().encode(savedDays) {
-                    appStorage.cleaningDaysData = encoded
-                }
-            }
-        }
-    }
-    
-    private func getCurrentDay() -> Int {
-        let defaults = UserDefaults.standard
-        let currentDay = defaults.integer(forKey: "currentCleaningDay")
-        if currentDay == 0 || currentDay > 7 {
-            defaults.set(1, forKey: "currentCleaningDay")
-            return 1
-        }
-        return currentDay
-    }
-    
-    private func incrementCurrentDay() {
-        let defaults = UserDefaults.standard
-        var currentDay = defaults.integer(forKey: "currentCleaningDay")
-        currentDay += 1
-        if currentDay > 7 {
-            currentDay = 1 // Reset to day 1 after completing 7 days
-        }
-        defaults.set(currentDay, forKey: "currentCleaningDay")
-    }
-    
-    private func schedulePushNotificationForNextDay() {
-        let content = UNMutableNotificationContent()
-        content.title = "Water Eject Cleaning"
-        content.body = "Time to clean your device's speaker! Complete today's cleaning task."
-        content.sound = .default
-        
-        // Schedule for tomorrow at the same time
-        var components = Calendar.current.dateComponents([.hour, .minute], from: Date())
-        components.day = Calendar.current.component(.day, from: Date()) + 1
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(
-            identifier: "cleaning-reminder",
-            content: content,
-            trigger: trigger
-        )
-        
-        UNUserNotificationCenter.current().add(request)
+        cleaningProgress.markDayAsCompleted()
     }
     
     func stopSession() {

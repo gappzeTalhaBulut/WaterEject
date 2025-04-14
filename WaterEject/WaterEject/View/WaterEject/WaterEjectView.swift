@@ -11,6 +11,7 @@ import MediaPlayer
 
 struct WaterEjectView: View {
     @StateObject private var viewModel = WaterEjectViewModel()
+    @StateObject private var cleaningProgress = CleaningProgress.shared
     
     var body: some View {
         NavigationHost(title: "Speaker Cleaner") {
@@ -18,6 +19,7 @@ struct WaterEjectView: View {
                 SevenDayCleaningView()
                     .padding(.horizontal)
                     .padding(.bottom, 20)
+                    .environmentObject(cleaningProgress)
                 
                 // Progress indicator
                 ZStack {
@@ -91,25 +93,6 @@ struct WaterEjectView: View {
                 try? audioSession.setActive(true)
                 MPVolumeView.setVolume(1.0)
             }
-        }
-    }
-}
-
-class SevenDayViewModel: ObservableObject {
-    @Published var currentDay = 1
-    @Published var completedDays: Set<Int> = []
-    
-    private var sevenDayView: SevenDayCleaningView?
-    
-    func setView(_ view: SevenDayCleaningView) {
-        self.sevenDayView = view
-    }
-    
-    func completeCurrentDay() {
-        sevenDayView?.markDayAsCompleted(day: currentDay)
-        completedDays.insert(currentDay)
-        if currentDay < 7 {
-            currentDay += 1
         }
     }
 }
