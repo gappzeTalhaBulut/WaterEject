@@ -56,6 +56,7 @@
 		BCCFB5DC2DA9371A001E3B14 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB5DB2DA9371A001E3B14 /* KeychainSwift */; };
 		BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */; };
 		BCCFB5E02DA94153001E3B14 /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */; };
+		BCCFB5E32DAD17B9001E3B14 /* SevenDaysCleaningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		BCCFB5D82DA936DC001E3B14 /* KeychainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = SOURCE_ROOT; };
+		BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDaysCleaningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				BCCFB5C62DA93021001E3B14 /* Constant */,
 				BCCFB5BB2DA92F4F001E3B14 /* RemoteConfig */,
 				BCCFB5B12DA86959001E3B14 /* Network */,
+				BCCFB5E12DAD1785001E3B14 /* Component */,
 				BCCFB5AE2DA86816001E3B14 /* Manager */,
 				BCCFB5A52DA866B9001E3B14 /* Adapty */,
 				BCBEBC682D888D450048C61D /* Extension */,
@@ -384,6 +387,14 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		BCCFB5E12DAD1785001E3B14 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -478,6 +489,7 @@
 				BCCFB5BA2DA86A4D001E3B14 /* AppOpenResponse.swift in Sources */,
 				BCCFB5A22DA55A8B001E3B14 /* StereoView.swift in Sources */,
 				BCCFB5CD2DA9338F001E3B14 /* LogHelper.swift in Sources */,
+				BCCFB5E32DAD17B9001E3B14 /* SevenDaysCleaningView.swift in Sources */,
 				BCBEBC412D8328E10048C61D /* ToneGeneratorView.swift in Sources */,
 				BCBEBC3D2D82FB700048C61D /* AudioEngine.swift in Sources */,
 				BCBEBC472D8424980048C61D /* DBMeterView.swift in Sources */,

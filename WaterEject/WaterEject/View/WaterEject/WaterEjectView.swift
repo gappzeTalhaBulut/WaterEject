@@ -14,12 +14,10 @@ struct WaterEjectView: View {
     
     var body: some View {
         NavigationHost(title: "Speaker Cleaner") {
-            VStack(spacing: 20) {
-
-                Text("Su Çıkarma Özelliği")
-                    .font(.title)
-                    .padding()
-                    .opacity(0)
+            VStack(spacing: 0) {
+                SevenDayCleaningView()
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
                 
                 // Progress indicator
                 ZStack {
@@ -48,7 +46,10 @@ struct WaterEjectView: View {
                     }
                 }
                 .frame(width: 200, height: 200)
+                .padding(.top, 20)
+                
                 Spacer()
+                
                 VStack(spacing: 16) {
                     Button(action: {
                         if viewModel.isPlaying {
@@ -61,10 +62,9 @@ struct WaterEjectView: View {
                             .foregroundColor(.white)
                             .font(.headline)
                             .frame(width: 200, height: 50)
-                            
                             .background(viewModel.isPlaying ? Color.red : Color.blue)
+                            .cornerRadius(25)
                     }
-                    .cornerRadius(25)
                     
                     Text("Note: This feature is designed to clean water from your speaker. For best results, please repeat several times.")
                         .font(.caption)
@@ -77,11 +77,39 @@ struct WaterEjectView: View {
                 .padding(.bottom, 20)
             }
             .onAppear {
+                // Push notifications için izin isteği
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                    if granted {
+                        print("Notification permission granted")
+                    } else if let error = error {
+                        print("Notification permission error: \(error.localizedDescription)")
+                    }
+                }
+                
                 // Set system volume to maximum
                 let audioSession = AVAudioSession.sharedInstance()
                 try? audioSession.setActive(true)
                 MPVolumeView.setVolume(1.0)
             }
+        }
+    }
+}
+
+class SevenDayViewModel: ObservableObject {
+    @Published var currentDay = 1
+    @Published var completedDays: Set<Int> = []
+    
+    private var sevenDayView: SevenDayCleaningView?
+    
+    func setView(_ view: SevenDayCleaningView) {
+        self.sevenDayView = view
+    }
+    
+    func completeCurrentDay() {
+        sevenDayView?.markDayAsCompleted(day: currentDay)
+        completedDays.insert(currentDay)
+        if currentDay < 7 {
+            currentDay += 1
         }
     }
 }
