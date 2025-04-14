@@ -16,6 +16,7 @@ struct DayIndicator: Identifiable, Codable {
 }
 
 struct SevenDayCleaningView: View {
+    @Environment(\.colorScheme) var colorScheme
     private let appStorage: AppStorageManager
     @State private var days: [DayIndicator] = []
     
@@ -23,8 +24,26 @@ struct SevenDayCleaningView: View {
         self.appStorage = appStorage
     }
     
+    private var backgroundGradient: LinearGradient {
+        let darkBlue = Color.blue.opacity(colorScheme == .dark ? 0.2 : 0.1)
+        let lightBlue = Color.blue.opacity(colorScheme == .dark ? 0.1 : 0.05)
+        return LinearGradient(
+            colors: [darkBlue, lightBlue],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+    
+    private var textColor: Color {
+        colorScheme == .dark ? .white : .primary
+    }
+    
+    private var subtitleColor: Color {
+        colorScheme == .dark ? .gray : .secondary
+    }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
             Button(action: {
                 // İleride detay sayfasına yönlendirme yapılabilir
             }) {
@@ -32,16 +51,14 @@ struct SevenDayCleaningView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("7-day cleaning Plan:")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(textColor)
                         
                         Text("Perform a complete cleaning by daily cleaning")
                             .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .lineLimit(2)
+                            .foregroundColor(subtitleColor)
                     }
                     
                     Spacer()
-                    
                 }
                 .padding(.horizontal)
             }
@@ -49,14 +66,18 @@ struct SevenDayCleaningView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(days) { day in
-                        DayCircleView(day: day.day, isCompleted: day.isCompleted)
+                        DayCircleView(
+                            day: day.day,
+                            isCompleted: day.isCompleted,
+                            colorScheme: colorScheme
+                        )
                     }
                 }
                 .padding(.horizontal)
             }
         }
         .padding(.vertical)
-        .background(Color(uiColor: .systemBlue).opacity(0.2))
+        .background(backgroundGradient)
         .cornerRadius(12)
         .onAppear {
             loadDays()
@@ -120,17 +141,43 @@ struct SevenDayCleaningView: View {
 struct DayCircleView: View {
     let day: Int
     let isCompleted: Bool
+    let colorScheme: ColorScheme
+    
+    private var circleColor: Color {
+        if isCompleted {
+            return colorScheme == .dark ? .blue : .blue.opacity(0.9)
+        } else {
+            return .clear
+        }
+    }
+    
+    private var borderColor: Color {
+        if isCompleted {
+            return colorScheme == .dark ? .white : .white
+        } else {
+            return colorScheme == .dark ? .gray.opacity(0.3) : .gray.opacity(0.4)
+        }
+    }
+    
+    private var textColor: Color {
+        if isCompleted {
+            return .white
+        } else {
+            return colorScheme == .dark ? .gray : .gray.opacity(0.8)
+        }
+    }
     
     var body: some View {
         ZStack {
             Circle()
-                .strokeBorder(isCompleted ? Color.white : Color.gray.opacity(0.3), lineWidth: isCompleted ? 3 : 1)
-                .background(Circle().fill(isCompleted ? Color.blue : Color.clear))
+                .strokeBorder(borderColor, lineWidth: isCompleted ? 3 : 1)
+                .background(Circle().fill(circleColor))
                 .frame(width: 40, height: 40)
+                .shadow(color: isCompleted ? .blue.opacity(0.3) : .clear, radius: 4)
             
             VStack(spacing: 2) {
                 Text("\(day)")
-                    .foregroundColor(isCompleted ? .white : .gray)
+                    .foregroundColor(textColor)
                     .font(.system(size: 16, weight: .bold))
             }
         }
@@ -139,17 +186,35 @@ struct DayCircleView: View {
 }
 
 #Preview {
-    VStack {
-        SevenDayCleaningView()
+    Group {
+        // Dark mode preview
+        VStack {
+            SevenDayCleaningView()
+                .padding()
+            
+            HStack(spacing: 12) {
+                DayCircleView(day: 1, isCompleted: false, colorScheme: .dark)
+                DayCircleView(day: 2, isCompleted: true, colorScheme: .dark)
+            }
             .padding()
-        
-        // Preview için farklı durumları göster
-        HStack(spacing: 12) {
-            DayCircleView(day: 1, isCompleted: false)
-            DayCircleView(day: 2, isCompleted: true)
         }
-        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.black)
+        .environment(\.colorScheme, .dark)
+        
+        // Light mode preview
+        VStack {
+            SevenDayCleaningView()
+                .padding()
+            
+            HStack(spacing: 12) {
+                DayCircleView(day: 1, isCompleted: false, colorScheme: .light)
+                DayCircleView(day: 2, isCompleted: true, colorScheme: .light)
+            }
+            .padding()
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .environment(\.colorScheme, .light)
     }
-    .frame(maxWidth: .infinity)
-    .background(Color.black)
 }
