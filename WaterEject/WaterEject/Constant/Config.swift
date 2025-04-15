@@ -12,8 +12,8 @@ enum Config {
     static var appStoreMyApps: String = "" // yanlış
     static var privacy: String = "https://watereject.reventyapp.com/privacy-policy"
     static var terms: String = "https://watereject.reventyapp.com/terms-of-use"
-    static let appUrl: String = "https://itunes.apple.com/app/id6025" // doğru
-    static let reviewURL: String = "https://apps.apple.com/app/id67331?action=write-review" // yanlış
+    static let appUrl: String = "https://itunes.apple.com/app/id6743395326" // doğru
+    static let reviewURL: String = "https://apps.apple.com/app/id6743395326?action=write-review" // yanlış
     
     static var bundleIdentifier: String {
         return Bundle.main.bundleIdentifier ?? ""
@@ -22,3 +22,4 @@ enum Config {
     static var isAdsActive: Bool = true
     static var api_key: String = ""
 }
+

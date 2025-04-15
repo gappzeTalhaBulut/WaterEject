@@ -9,7 +9,7 @@ import Foundation
 import OneSignalFramework
 
 final class OneSignalLoadableStrategy: SDKLodableStrategy {
-    private let sdkID = "c232970c-974a-4607-b58f-63b9cda2451f"
+    private let sdkID = "9fcfb5f4-ba06-4956-aea7-1870eeca9aac"
     private let permissionRequestCountKey = "permissionRequestCount"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {

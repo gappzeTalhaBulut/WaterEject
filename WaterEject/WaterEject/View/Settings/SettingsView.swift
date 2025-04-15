@@ -12,7 +12,52 @@ import AlertKit
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject private var navigationManager = NavigationManager.shared
+    @StateObject private var appStorage = AppStorageManager()
     private let paywallRepository = PaywallRepository.shared
+    
+    private func shareApp() {
+        guard let url = URL(string: Config.appUrl) else { return }
+        let activityVC = UIActivityViewController(
+            activityItems: ["Check out this awesome app!", url],
+            applicationActivities: nil
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+                return
+            }
+            
+            // Recursively find the topmost presented view controller
+            var topController = window.rootViewController
+            while let presentedVC = topController?.presentedViewController {
+                topController = presentedVC
+            }
+            
+            if let topController = topController {
+                // For iPad
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    activityVC.popoverPresentationController?.sourceView = topController.view
+                    activityVC.popoverPresentationController?.sourceRect = CGRect(
+                        x: UIScreen.main.bounds.width / 2,
+                        y: UIScreen.main.bounds.height / 2,
+                        width: 0,
+                        height: 0
+                    )
+                    activityVC.popoverPresentationController?.permittedArrowDirections = []
+                }
+                
+                topController.present(activityVC, animated: true)
+            }
+        }
+    }
+    
+    private func openURL(_ url: URL) {
+        DispatchQueue.main.async {
+            UIApplication.shared.open(url)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -42,7 +87,6 @@ struct SettingsView: View {
                 
                 Section {
                     Button(action: {
-                        guard let url = URL(string: "https://apps.apple.com/app/id123456789") else { return }
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                             SKStoreReviewController.requestReview(in: windowScene)
                         }
@@ -51,18 +95,7 @@ struct SettingsView: View {
                     }
                     
                     Button(action: {
-                        guard let url = URL(string: "https://apps.apple.com/app/id123456789") else { return }
-                        let activityVC = UIActivityViewController(
-                            activityItems: ["Check out this awesome app!", url],
-                            applicationActivities: nil
-                        )
-                        
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                           let window = windowScene.windows.first,
-                           let rootVC = window.rootViewController {
-                            activityVC.popoverPresentationController?.sourceView = rootVC.view
-                            rootVC.present(activityVC, animated: true)
-                        }
+                        shareApp()
                     }) {
                         Label("Share App", systemImage: "square.and.arrow.up")
                     }
@@ -71,7 +104,7 @@ struct SettingsView: View {
                 Section {
                     Button(action: {
                         if let url = URL(string: Config.privacy) {
-                            UIApplication.shared.open(url)
+                            openURL(url)
                         }
                     }) {
                         Label("Privacy Policy", systemImage: "hand.raised.fill")
@@ -79,7 +112,7 @@ struct SettingsView: View {
                     
                     Button(action: {
                         if let url = URL(string: Config.terms) {
-                            UIApplication.shared.open(url)
+                            openURL(url)
                         }
                     }) {
                         Label("Terms of Use", systemImage: "doc.text.fill")
