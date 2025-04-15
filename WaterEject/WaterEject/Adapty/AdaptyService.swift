@@ -69,7 +69,11 @@ final class AdaptyService: ObservableObject {
     private func showPaywall(paywall: AdaptyPaywall, configuration: AdaptyUI.PaywallConfiguration) async {
         self.paywall = paywall
         self.paywallConfiguration = configuration
-        self.isPaywallPresented = true
+        await MainActor.run {
+            withAnimation(.easeInOut) {
+                self.isPaywallPresented = true
+            }
+        }
         self.analyticsDelegate?.onPaywallOpen(
             paywallName: paywall.name,
             isABTest: paywall.abTestName != paywall.name,
@@ -79,7 +83,9 @@ final class AdaptyService: ObservableObject {
     
     func hidePaywall() {
         print("AdaptyService - hidePaywall called")
-        isPaywallPresented = false
+        withAnimation(.easeInOut) {
+            isPaywallPresented = false
+        }
         paywall = nil
         paywallConfiguration = nil
         analyticsDelegate?.onPaywallClose()

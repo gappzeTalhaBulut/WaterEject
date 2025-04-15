@@ -12,11 +12,14 @@ class WaterEjectViewModel: ObservableObject {
     @Published var isPlaying = false
     @Published var progress: Double = 0.0
     @Published var currentPhase = ""
+    @Published var showPaywall = false
     
     private let audioEngine = AudioEngine()
-    private var progressTimer: Timer?
     private let appStorage: AppStorageManager
     private let cleaningProgress: CleaningProgress
+    private let paywallRepository = PaywallRepository.shared
+    private var progressTimer: Timer?
+    private var premiumCheckTimer: Timer?
     
     init(appStorage: AppStorageManager = AppStorageManager(),
          cleaningProgress: CleaningProgress = .shared) {
@@ -39,6 +42,11 @@ class WaterEjectViewModel: ObservableObject {
         progress = 0.0
         currentPhase = "Starting cleaning..."
         
+        // Premium check timer
+        premiumCheckTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
+            self?.checkPremiumAndContinue()
+        }
+        
         // More gradual frequency changes with overlap
         let frequencies: [(Float, TimeInterval)] = [
             (165, 8.0),  // Low frequency start
@@ -58,6 +66,30 @@ class WaterEjectViewModel: ObservableObject {
         // Total duration is now 96 seconds
         startProgressTimer(totalDuration: 96.0)
         audioEngine.playFrequenciesSequence(frequencies: frequencies)
+    }
+    
+    private func checkPremiumAndContinue() {
+        if !appStorage.isPremium {
+            stopSession()
+            Task {
+                await showPaywallForUser()
+            }
+        }
+    }
+    
+    private func showPaywallForUser() async {
+        await paywallRepository.openPaywallIfEnabled(
+            action: .cleanAction,
+            isNotVisibleAction: nil,
+            onCloseAction: nil,
+            willOpenADS: nil,
+            onPurchaseSuccess: { [weak self] in
+                self?.startWaterEject()
+            },
+            onRestoreSuccess: { [weak self] in
+                self?.startWaterEject()
+            }
+        )
     }
     
     private func startProgressTimer(totalDuration: TimeInterval) {
@@ -97,6 +129,8 @@ class WaterEjectViewModel: ObservableObject {
     func stopSession() {
         progressTimer?.invalidate()
         progressTimer = nil
+        premiumCheckTimer?.invalidate()
+        premiumCheckTimer = nil
         isPlaying = false
         progress = 0.0
         currentPhase = ""
@@ -105,5 +139,6 @@ class WaterEjectViewModel: ObservableObject {
     
     deinit {
         progressTimer?.invalidate()
+        premiumCheckTimer?.invalidate()
     }
 }

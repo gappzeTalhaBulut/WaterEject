@@ -16,6 +16,10 @@ struct StereoView: View {
     @State private var isAutoTuneEnabled = false
     @State private var autoTuneTimer: Timer?
     @State private var currentAutoTuneState = 0 // 0: both, 1: left, 2: right
+    @State private var premiumCheckTimer: Timer?
+    
+    private let appStorage = AppStorageManager()
+    private let paywallRepository = PaywallRepository.shared
     
     private func startAutoTune() {
         // Önce mevcut timer'ı temizle
@@ -51,6 +55,51 @@ struct StereoView: View {
     private func stopAutoTune() {
         autoTuneTimer?.invalidate()
         autoTuneTimer = nil
+    }
+    
+    private func startPlayback() {
+        audioEngine.playWavFile(named: "music1")
+        if isAutoTuneEnabled {
+            startAutoTune()
+        }
+        isPlaying = true
+        
+        // Premium check timer - 3 seconds
+        premiumCheckTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+            checkPremiumAndContinue()
+        }
+    }
+    
+    private func stopPlayback() {
+        audioEngine.stopPlayback()
+        stopAutoTune()
+        premiumCheckTimer?.invalidate()
+        premiumCheckTimer = nil
+        isPlaying = false
+    }
+    
+    private func checkPremiumAndContinue() {
+        if !appStorage.isPremium {
+            stopPlayback()
+            Task {
+                await showPaywallForUser()
+            }
+        }
+    }
+    
+    private func showPaywallForUser() async {
+        await paywallRepository.openPaywallIfEnabled(
+            action: .toneAction,
+            isNotVisibleAction: nil,
+            onCloseAction: nil,
+            willOpenADS: nil,
+            onPurchaseSuccess: {
+                startPlayback()
+            },
+            onRestoreSuccess: {
+                startPlayback()
+            }
+        )
     }
     
     var body: some View {
@@ -128,12 +177,10 @@ struct StereoView: View {
                                 set: { newValue in
                                     isAutoTuneEnabled = newValue
                                     if newValue {
-                                        // AutoTune açıldığında ve ses çalıyorsa timer'ı başlat
                                         if isPlaying {
                                             startAutoTune()
                                         }
                                     } else {
-                                        // AutoTune kapatıldığında timer'ı durdur
                                         stopAutoTune()
                                     }
                                 }
@@ -152,15 +199,10 @@ struct StereoView: View {
                     VStack(spacing: 16) {
                         Button(action: {
                             if isPlaying {
-                                audioEngine.stopPlayback()
-                                stopAutoTune()
+                                stopPlayback()
                             } else {
-                                audioEngine.playWavFile(named: "music1")
-                                if isAutoTuneEnabled {
-                                    startAutoTune()
-                                }
+                                startPlayback()
                             }
-                            isPlaying.toggle()
                         }) {
                             Text(isPlaying ? "Stop" : "Start")
                                 .foregroundColor(.white)
@@ -185,6 +227,7 @@ struct StereoView: View {
         }
         .onDisappear {
             stopAutoTune()
+            stopPlayback()
         }
     }
 }

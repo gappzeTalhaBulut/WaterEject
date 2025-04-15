@@ -16,6 +16,13 @@ class ToneGeneratorViewModel: ObservableObject {
     private let audioEngine = AudioEngine()
     private let minFrequency: Double = 1
     private let maxFrequency: Double = 22000
+    private let appStorage: AppStorageManager
+    private let paywallRepository = PaywallRepository.shared
+    private var premiumCheckTimer: Timer?
+    
+    init(appStorage: AppStorageManager = AppStorageManager()) {
+        self.appStorage = appStorage
+    }
     
     // Add color computation
     var frequencyColor: Color {
@@ -45,18 +52,58 @@ class ToneGeneratorViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.isPlaying.toggle()
             if self.isPlaying {
-                self.playCurrentFrequency()
+                self.startPlayback()
             } else {
-                self.audioEngine.stopPlayback()
+                self.stopPlayback()
             }
         }
+    }
+    
+    private func startPlayback() {
+        playCurrentFrequency()
+        
+        // Premium check timer - 3 seconds
+        premiumCheckTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
+            self?.checkPremiumAndContinue()
+        }
+    }
+    
+    private func checkPremiumAndContinue() {
+        if !appStorage.isPremium {
+            stopPlayback()
+            Task {
+                await showPaywallForUser()
+            }
+        }
+    }
+    
+    private func showPaywallForUser() async {
+        await paywallRepository.openPaywallIfEnabled(
+            action: .toneAction,
+            isNotVisibleAction: nil,
+            onCloseAction: nil,
+            willOpenADS: nil,
+            onPurchaseSuccess: { [weak self] in
+                self?.startPlayback()
+            },
+            onRestoreSuccess: { [weak self] in
+                self?.startPlayback()
+            }
+        )
     }
     
     private func playCurrentFrequency() {
         audioEngine.playFrequency(Float(currentFrequency), duration: 60.0)
     }
     
-    deinit {
+    func stopPlayback() {
+        premiumCheckTimer?.invalidate()
+        premiumCheckTimer = nil
+        isPlaying = false
         audioEngine.stopPlayback()
+    }
+    
+    deinit {
+        stopPlayback()
     }
 }

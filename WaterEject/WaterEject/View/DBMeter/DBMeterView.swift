@@ -111,6 +111,9 @@ struct DBMeterView: View {
                 .padding(.bottom, 20)
             }
         }
+        .onDisappear {
+            viewModel.stopRecording()
+        }
     }
 }
 
