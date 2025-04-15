@@ -78,7 +78,6 @@ final class PaywallRepository: ObservableObject {
                     switch result {
                     case .success(let response):
                         self.response = response
-                        self.remoteConfig.didGetConfig?()
                         continuation.resume(returning: response)
                     case .failure(let error):
                         print("Failed to fetch remote config: \(error)")
@@ -92,8 +91,9 @@ final class PaywallRepository: ObservableObject {
                 Config.isAdsActive = result.isAdsActive ?? true
             }
             return result.isPremium
+            
         } catch {
-           // await handleError(error: error as! NetworkError)
+            print("Both service and remote config failed: \(error)")
             return false
         }
     }
@@ -119,17 +119,24 @@ final class PaywallRepository: ObservableObject {
         onPurchaseSuccess: @escaping () -> (),
         onRestoreSuccess: @escaping () -> ()
     ) async {
+        // Clear any existing state first
+        currentPlacementId = nil
+        currentAction = nil
+        onPaywallCloseAction = nil
+        
         guard let paywall = response.actions?.getPaywall(action), paywall.willBeShown else {
+            print("PaywallRepository - Paywall will not be shown")
             isNotVisibleAction?()
             return
         }
         
+        print("PaywallRepository - Opening paywall with action: \(action)")
         self.currentPlacementId = paywall.placementId
         self.currentAction = action
-        self.onPaywallCloseAction = { [weak self] in
-            Task { [weak self] in
+        self.onPaywallCloseAction = {
+            print("PaywallRepository - onPaywallCloseAction triggered")
+            Task {
                 await onCloseAction?()
-                self?.onPaywallCloseAction = nil
             }
         }
         self.onPaywallPurchaseSuccess = onPurchaseSuccess
@@ -138,8 +145,21 @@ final class PaywallRepository: ObservableObject {
         do {
             try await paywallService.openPaywall(placementId: paywall.placementId)
         } catch {
-            print("Failed to open paywall: \(error)")
+            print("PaywallRepository - Failed to open paywall: \(error)")
+            currentPlacementId = nil
+            currentAction = nil
+            onPaywallCloseAction = nil
             isNotVisibleAction?()
+        }
+    }
+    
+    func onPaywallClose() {
+        print("PaywallRepository - onPaywallClose triggered")
+        Task { @MainActor in
+            if let closeAction = onPaywallCloseAction {
+                await closeAction()
+                self.onPaywallCloseAction = nil
+            }
         }
     }
 }
@@ -161,12 +181,6 @@ extension PaywallRepository: AdaptyAnalyticsDelegate {
          //    status: "Success",
          //    errorLog: "nil"
          //)
-        }
-    }
-    
-    func onPaywallClose() {
-        Task {
-            self.onPaywallCloseAction?()
         }
     }
     

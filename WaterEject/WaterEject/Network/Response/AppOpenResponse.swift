@@ -48,19 +48,29 @@ struct PaywallAction: Decodable {
     let premium: AppPaywall
     let onboarding: AppPaywall
     let frun: AppPaywall
-    let listenAction: AppPaywall
-    let createAction: AppPaywall
-    let voiceCloneAction: AppPaywall
+    let cleanAction: AppPaywall
+    let toneAction: AppPaywall
+    let dbMeterAction: AppPaywall
+    let stereoAction: AppPaywall
     
     func getPaywall(_ action: AppPaywallAction) -> AppPaywall {
         switch action {
-        case .push: return push
+        case .push: 
+            return push
         case .premium:
             return premium
         case .onboarding:
             return onboarding
         case .frunAction:
             return frun
+        case .cleanAction:
+            return cleanAction
+        case .toneAction:
+            return toneAction
+        case .dbMeterAction:
+            return dbMeterAction
+        case .stereoAction:
+            return stereoAction
         }
     }
 }

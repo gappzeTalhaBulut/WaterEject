@@ -20,12 +20,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         applicationSetup()
         sdkLoadableManager.application(application, didFinishLaunchingWithOptions: launchOptions)
-        initializePayWall()
+        Task {
+            await initializePayWall()
+        }
+        
         return true
     }
     
-    private func initializePayWall() {
-        AdaptyService.shared.initializeAdapty()
+    private func initializePayWall() async {
+        do {
+            try await AdaptyService.shared.initializeAdapty()
+        } catch {
+            print("Failed to initialize Adapty:", error.localizedDescription)
+        }
     }
 }
 

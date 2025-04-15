@@ -57,6 +57,7 @@
 		BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */; };
 		BCCFB5E02DA94153001E3B14 /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */; };
 		BCCFB5E32DAD17B9001E3B14 /* SevenDaysCleaningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */; };
+		BCCFB5E52DAE3EE7001E3B14 /* GeneralHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5E42DAE3EE7001E3B14 /* GeneralHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		BCCFB5DD2DA93932001E3B14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = SOURCE_ROOT; };
 		BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDaysCleaningView.swift; sourceTree = "<group>"; };
+		BCCFB5E42DAE3EE7001E3B14 /* GeneralHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				BCCFB5CC2DA9338F001E3B14 /* LogHelper.swift */,
+				BCCFB5E42DAE3EE7001E3B14 /* GeneralHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				BCCFB5CF2DA9340B001E3B14 /* UIDevice+Ext.swift in Sources */,
 				BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */,
 				BCCFB5CA2DA93070001E3B14 /* Config.swift in Sources */,
+				BCCFB5E52DAE3EE7001E3B14 /* GeneralHelper.swift in Sources */,
 				BCCFB5D62DA9368A001E3B14 /* FirebaseLoadableStrategy.swift in Sources */,
 				BCCFB59C2DA51F59001E3B14 /* OnboardingView.swift in Sources */,
 				BCCFB5C12DA92FB4001E3B14 /* RemoteConfigManager.swift in Sources */,

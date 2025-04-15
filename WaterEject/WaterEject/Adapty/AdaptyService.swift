@@ -28,13 +28,13 @@ final class AdaptyService: ObservableObject {
     @Published var isPaywallPresented = false
     @Published private(set) var paywall: AdaptyPaywall?
     @Published private(set) var paywallConfiguration: AdaptyUI.PaywallConfiguration?
+    @Published private(set) var viewConfiguration: AdaptyUI.Configuration?
     
     private init() {}
     
     // MARK: - Public Methods
-    func initializeAdapty() {
-        Adapty.activate("public_live_tDlH2mi6.cOn07VaOAVOZUsfQcxDP") // API key'i buraya ekleyin
-        
+    func initializeAdapty() async throws {
+        try await Adapty.activate("public_live_tDlH2mi6.cOn07VaOAVOZUsfQcxDP")
         let adaptyUIConfiguration = AdaptyUI.Configuration(
             mediaCacheConfiguration: .init(
                 memoryStorageTotalCostLimit: 100 * 1024 * 1024,
@@ -42,7 +42,7 @@ final class AdaptyService: ObservableObject {
                 diskStorageSizeLimit: 100 * 1024 * 1024
             )
         )
-        AdaptyUI.activate(configuration: adaptyUIConfiguration)
+        try await AdaptyUI.activate(configuration: adaptyUIConfiguration)
     }
     
     func openPaywall(placementId: String) async throws {
@@ -78,9 +78,11 @@ final class AdaptyService: ObservableObject {
     }
     
     func hidePaywall() {
+        print("AdaptyService - hidePaywall called")
         isPaywallPresented = false
         paywall = nil
         paywallConfiguration = nil
+        analyticsDelegate?.onPaywallClose()
     }
     
     func getAdaptyId() async -> String {
@@ -128,26 +130,45 @@ final class AdaptyService: ObservableObject {
             throw NSError(domain: "AdaptyService", code: 0, userInfo: [NSLocalizedDescriptionKey: "Premium subscription not found"])
         }
     }
-}
-
-// MARK: - AdaptyPaywallControllerDelegate
-extension AdaptyService: AdaptyPaywallControllerDelegate {
-    func paywallController(_ controller: AdaptyPaywallController, didFinishPurchase product: AdaptyPaywallProduct, purchaseResult: AdaptyPurchaseResult) {
-        guard let paywall = self.paywall else { return }
-        analyticsDelegate?.onPurchaseSuccess(
-            purchaseTransactionId: purchaseResult.profile?.profileId ?? "",
-            paywallName: paywall.placementId,
-            productId: product.vendorProductId,
-            isABTest: paywall.abTestName != paywall.name,
-            abTestName: paywall.abTestName,
-            price: product.price.description,
-            priceSymbol: product.currencyCode ?? ""
-        )
-        isPaywallPresented = false
+    
+    func handlePaywallAction(_ action: AdaptyUI.Action, paywall: AdaptyPaywall) {
+        switch action {
+        case .close:
+            hidePaywall()
+        case .openURL(let url):
+            UIApplication.shared.open(url, options: [:])
+        case .custom:
+            break
+        }
     }
     
-    func paywallController(_ controller: AdaptyPaywallController, didFailPurchase product: AdaptyPaywallProduct, error: AdaptyError) {
-        guard let paywall = self.paywall else { return }
+    func handlePurchaseSuccess(product: AdaptyPaywallProduct, purchaseResult: AdaptyPurchaseResult, paywall: AdaptyPaywall) {
+        if let profile = purchaseResult.profile {
+            analyticsDelegate?.onPurchaseSuccess(
+                purchaseTransactionId: profile.profileId,
+                paywallName: paywall.placementId,
+                productId: product.vendorProductId,
+                isABTest: paywall.abTestName != paywall.name,
+                abTestName: paywall.abTestName,
+                price: product.price.description,
+                priceSymbol: product.currencyCode ?? ""
+            )
+            hidePaywall()
+        } else {
+            analyticsDelegate?.onPurchaseFailed(
+                paywallName: paywall.placementId,
+                isABTest: paywall.abTestName != paywall.name,
+                abTestName: paywall.abTestName,
+                productCode: product.vendorProductId,
+                errorCode: "",
+                errorDetail: "",
+                price: product.price.description,
+                priceSymbol: product.currencyCode ?? ""
+            )
+        }
+    }
+    
+    func handlePurchaseFailure(product: AdaptyPaywallProduct, error: AdaptyError, paywall: AdaptyPaywall) {
         analyticsDelegate?.onPurchaseFailed(
             paywallName: paywall.placementId,
             isABTest: paywall.abTestName != paywall.name,
@@ -158,42 +179,6 @@ extension AdaptyService: AdaptyPaywallControllerDelegate {
             price: product.price.description,
             priceSymbol: product.currencyCode ?? ""
         )
-    }
-    
-    func paywallController(_ controller: AdaptyPaywallController, didPerform action: AdaptyUI.Action) {
-        guard let paywall = self.paywall else { return }
-        switch action {
-        case .close:
-            isPaywallPresented = false
-            analyticsDelegate?.onPaywallClose()
-        case let .openURL(url):
-            UIApplication.shared.open(url, options: [:])
-        case .custom:
-            break
-        }
-    }
-    
-    func paywallControllerDidStartRestore(_ controller: AdaptyPaywallController) {
-        // İsteğe bağlı olarak restore başlangıcını işleyebilirsiniz
-    }
-    
-    func paywallController(_ controller: AdaptyPaywallController, didFinishRestoreWith profile: AdaptyProfile) {
-        Task {
-            do {
-                try await restorePurchases()
-            } catch {
-                AlertKitAPI.present(title: "Premium Not Found!", style: .iOS17AppleMusic, haptic: .error)
-            }
-        }
-    }
-    
-    func paywallController(_ controller: AdaptyPaywallController, didFailRestoreWith error: AdaptyError) {
-        AlertKitAPI.present(title: "Error", style: .iOS17AppleMusic, haptic: .error)
-    }
-    
-    func paywallController(_ controller: AdaptyPaywallController, didFailRenderingWith error: AdaptyError) {
-        hidePaywall()
-        AlertKitAPI.present(title: error.localizedDescription, style: .iOS17AppleMusic, haptic: .error)
     }
 }
 
@@ -209,15 +194,14 @@ struct AdaptyPaywallModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         Group {
-            if let configuration = adaptyService.paywallConfiguration {
+            if let paywall = adaptyService.paywall,
+               let configuration = adaptyService.paywallConfiguration {
                 content.paywall(
                     isPresented: $adaptyService.isPaywallPresented,
                     fullScreen: true,
                     paywallConfiguration: configuration,
                     didPerformAction: { action in
-                        if case .close = action {
-                            adaptyService.isPaywallPresented = false
-                        }
+                        adaptyService.handlePaywallAction(action, paywall: paywall)
                     },
                     didSelectProduct: { product in
                         print("Selected product: \(product.localizedTitle)")
@@ -225,11 +209,11 @@ struct AdaptyPaywallModifier: ViewModifier {
                     didStartPurchase: { product in
                         print("Started purchase: \(product.localizedTitle)")
                     },
-                    didFinishPurchase: { _, _ in
-                        adaptyService.isPaywallPresented = false
+                    didFinishPurchase: { product, purchaseResult in
+                        adaptyService.handlePurchaseSuccess(product: product, purchaseResult: purchaseResult, paywall: paywall)
                     },
                     didFailPurchase: { product, error in
-                        print("Purchase failed: \(error.localizedDescription)")
+                        adaptyService.handlePurchaseFailure(product: product, error: error, paywall: paywall)
                     },
                     didStartRestore: {
                         print("Started restore")

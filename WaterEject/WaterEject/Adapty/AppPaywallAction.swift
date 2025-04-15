@@ -12,4 +12,8 @@ enum AppPaywallAction: String {
     case premium = "premiumAction"
     case onboarding = "onboardAction"
     case frunAction = "frunAction"
+    case cleanAction = "cleanAction"
+    case toneAction = "toneAction"
+    case dbMeterAction = "dbMeterAction"
+    case stereoAction = "stereoAction"
 }

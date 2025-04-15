@@ -9,6 +9,6 @@ import SwiftUI
 
 class AppStorageManager: ObservableObject {
     @AppStorage("isPremium") var isPremium: Bool = false
-    @AppStorage("SeenIntro") var seenIntro: Bool = false
     @AppStorage("cleaningDays") var cleaningDaysData: Data = Data()
+    @AppStorage("hasCompletedOnboarding") var hasCompletedOnboarding = false
 }
