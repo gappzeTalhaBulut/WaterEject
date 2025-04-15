@@ -58,7 +58,36 @@
 		BCCFB5E02DA94153001E3B14 /* NavigationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */; };
 		BCCFB5E32DAD17B9001E3B14 /* SevenDaysCleaningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */; };
 		BCCFB5E52DAE3EE7001E3B14 /* GeneralHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB5E42DAE3EE7001E3B14 /* GeneralHelper.swift */; };
+		BCCFB6032DAE81B3001E3B14 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB6022DAE81B3001E3B14 /* NotificationService.swift */; };
+		BCCFB6072DAE81B3001E3B14 /* NotificationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BCCFB6002DAE81B3001E3B14 /* NotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BCCFB60D2DAE81FA001E3B14 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60C2DAE81FA001E3B14 /* OneSignalExtension */; };
+		BCCFB60F2DAE81FA001E3B14 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60E2DAE81FA001E3B14 /* OneSignalFramework */; };
+		BCCFB6112DAE8238001E3B14 /* OnesignalLoadableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BCCFB6052DAE81B3001E3B14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCBEBC232D82F7100048C61D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCCFB5FF2DAE81B3001E3B14;
+			remoteInfo = NotificationExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BCCFB5FB2DAE8179001E3B14 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BCCFB6072DAE81B3001E3B14 /* NotificationExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BCBEBC2B2D82F7100048C61D /* WaterEject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterEject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +132,10 @@
 		BCCFB5DF2DA94153001E3B14 /* NavigationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHost.swift; sourceTree = SOURCE_ROOT; };
 		BCCFB5E22DAD17B9001E3B14 /* SevenDaysCleaningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDaysCleaningView.swift; sourceTree = "<group>"; };
 		BCCFB5E42DAE3EE7001E3B14 /* GeneralHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelper.swift; sourceTree = "<group>"; };
+		BCCFB6002DAE81B3001E3B14 /* NotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCCFB6022DAE81B3001E3B14 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		BCCFB6042DAE81B3001E3B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnesignalLoadableStrategy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +152,16 @@
 				BCBEBC562D888D060048C61D /* FirebaseAnalytics in Frameworks */,
 				BCBEBC6E2D8890C90048C61D /* Adapty in Frameworks */,
 				BCBEBC702D8890C90048C61D /* AdaptyPlugin in Frameworks */,
+				BCCFB60F2DAE81FA001E3B14 /* OneSignalFramework in Frameworks */,
 				BCBEBC5E2D888D060048C61D /* FirebaseRemoteConfig in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCCFB5FD2DAE81B3001E3B14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCCFB60D2DAE81FA001E3B14 /* OneSignalExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				BCBEBC2D2D82F7100048C61D /* WaterEject */,
+				BCCFB6012DAE81B3001E3B14 /* NotificationExtension */,
 				BCBEBC2C2D82F7100048C61D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				BCBEBC2B2D82F7100048C61D /* WaterEject.app */,
+				BCCFB6002DAE81B3001E3B14 /* NotificationExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -378,6 +422,7 @@
 			children = (
 				BCCFB5D32DA935F2001E3B14 /* LoadableManager.swift */,
 				BCCFB5D52DA9368A001E3B14 /* FirebaseLoadableStrategy.swift */,
+				BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */,
 			);
 			path = Loadable;
 			sourceTree = "<group>";
@@ -398,6 +443,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		BCCFB6012DAE81B3001E3B14 /* NotificationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB6022DAE81B3001E3B14 /* NotificationService.swift */,
+				BCCFB6042DAE81B3001E3B14 /* Info.plist */,
+			);
+			path = NotificationExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,10 +462,12 @@
 				BCBEBC272D82F7100048C61D /* Sources */,
 				BCBEBC282D82F7100048C61D /* Frameworks */,
 				BCBEBC292D82F7100048C61D /* Resources */,
+				BCCFB5FB2DAE8179001E3B14 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BCCFB6062DAE81B3001E3B14 /* PBXTargetDependency */,
 			);
 			name = WaterEject;
 			packageProductDependencies = (
@@ -425,10 +481,31 @@
 				BCBEBC6F2D8890C90048C61D /* AdaptyPlugin */,
 				BCBEBC712D8890C90048C61D /* AdaptyUI */,
 				BCCFB5DB2DA9371A001E3B14 /* KeychainSwift */,
+				BCCFB60E2DAE81FA001E3B14 /* OneSignalFramework */,
 			);
 			productName = WaterEject;
 			productReference = BCBEBC2B2D82F7100048C61D /* WaterEject.app */;
 			productType = "com.apple.product-type.application";
+		};
+		BCCFB5FF2DAE81B3001E3B14 /* NotificationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCCFB6082DAE81B3001E3B14 /* Build configuration list for PBXNativeTarget "NotificationExtension" */;
+			buildPhases = (
+				BCCFB5FC2DAE81B3001E3B14 /* Sources */,
+				BCCFB5FD2DAE81B3001E3B14 /* Frameworks */,
+				BCCFB5FE2DAE81B3001E3B14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationExtension;
+			packageProductDependencies = (
+				BCCFB60C2DAE81FA001E3B14 /* OneSignalExtension */,
+			);
+			productName = NotificationExtension;
+			productReference = BCCFB6002DAE81B3001E3B14 /* NotificationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -441,6 +518,9 @@
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					BCBEBC2A2D82F7100048C61D = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					BCCFB5FF2DAE81B3001E3B14 = {
 						CreatedOnToolsVersion = 15.2;
 					};
 				};
@@ -459,12 +539,14 @@
 				BCBEBC692D888DE50048C61D /* XCRemoteSwiftPackageReference "AlertKit" */,
 				BCBEBC6C2D8890C90048C61D /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
 				BCCFB5DA2DA9371A001E3B14 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				BCCFB60B2DAE81F9001E3B14 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 			);
 			productRefGroup = BCBEBC2C2D82F7100048C61D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BCBEBC2A2D82F7100048C61D /* WaterEject */,
+				BCCFB5FF2DAE81B3001E3B14 /* NotificationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -478,6 +560,13 @@
 				BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */,
 				BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */,
 				BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCCFB5FE2DAE81B3001E3B14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,12 +612,29 @@
 				BCBEBC492D8424AB0048C61D /* DBMeterViewModel.swift in Sources */,
 				BCCFB5C52DA92FF3001E3B14 /* RemoteConfigProtocol.swift in Sources */,
 				BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */,
+				BCCFB6112DAE8238001E3B14 /* OnesignalLoadableStrategy.swift in Sources */,
 				BCCFB5BF2DA92F83001E3B14 /* RemoteConfigKey.swift in Sources */,
 				BCCFB5D42DA935F2001E3B14 /* LoadableManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BCCFB5FC2DAE81B3001E3B14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCCFB6032DAE81B3001E3B14 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BCCFB6062DAE81B3001E3B14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCCFB5FF2DAE81B3001E3B14 /* NotificationExtension */;
+			targetProxy = BCCFB6052DAE81B3001E3B14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		BCBEBC372D82F7120048C61D /* Debug */ = {
@@ -653,6 +759,7 @@
 		BCBEBC3A2D82F7120048C61D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
@@ -683,6 +790,7 @@
 		BCBEBC3B2D82F7120048C61D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
@@ -710,6 +818,60 @@
 			};
 			name = Release;
 		};
+		BCCFB6092DAE81B3001E3B14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app.NotificationExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BCCFB60A2DAE81B3001E3B14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app.NotificationExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -727,6 +889,15 @@
 			buildConfigurations = (
 				BCBEBC3A2D82F7120048C61D /* Debug */,
 				BCBEBC3B2D82F7120048C61D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCCFB6082DAE81B3001E3B14 /* Build configuration list for PBXNativeTarget "NotificationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCCFB6092DAE81B3001E3B14 /* Debug */,
+				BCCFB60A2DAE81B3001E3B14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -764,6 +935,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 24.0.0;
+			};
+		};
+		BCCFB60B2DAE81F9001E3B14 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.10;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -818,6 +997,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BCCFB5DA2DA9371A001E3B14 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		BCCFB60C2DAE81FA001E3B14 /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCCFB60B2DAE81F9001E3B14 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignalExtension;
+		};
+		BCCFB60E2DAE81FA001E3B14 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCCFB60B2DAE81F9001E3B14 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignalFramework;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

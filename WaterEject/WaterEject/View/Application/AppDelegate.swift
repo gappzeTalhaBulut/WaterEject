@@ -12,7 +12,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     private lazy var sdkLoadableManager: SDKLodableStrategy = {
         let manager = SDKLodableManager(loadables: [
             FirebaseLoadableStrategy(),
-            //OneSignalLoadableStrategy(),
+            OneSignalLoadableStrategy(),
         ])
         return manager
     }()
