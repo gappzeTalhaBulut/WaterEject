@@ -19,6 +19,8 @@ struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @EnvironmentObject private var navigationManager: NavigationManager
     @State private var currentPage = 0
+    @State private var isPaywallVisible = false
+    private let paywallRepository = PaywallRepository.shared
     
     let pages: [OnboardingPage] = [
         OnboardingPage(
@@ -94,29 +96,27 @@ struct OnboardingView: View {
             }
         }
         .navigationBarHidden(true)
+        .adaptyPaywall()
     }
     
     private func completedOnboarding() {
         hasCompletedOnboarding = true
+        isPaywallVisible = true
         
-        // Önce paywall göster
         Task {
-            await PaywallRepository.shared.openPaywallIfEnabled(
+            await paywallRepository.openPaywallIfEnabled(
                 action: .onboarding,
                 isNotVisibleAction: {
-                    // Paywall gösterilmeyecekse direkt ana ekrana geç
                     navigateToHome()
                 },
                 onCloseAction: {
-                    // Paywall kapatılırsa ana ekrana geç
                     navigateToHome()
                 },
+                willOpenADS: nil,
                 onPurchaseSuccess: {
-                    // Başarılı satın alma sonrası ana ekrana geç
                     navigateToHome()
                 },
                 onRestoreSuccess: {
-                    // Başarılı restore sonrası ana ekrana geç
                     navigateToHome()
                 }
             )
@@ -124,10 +124,13 @@ struct OnboardingView: View {
     }
     
     private func navigateToHome() {
-        navigationManager.navigate(to: .home)
+        withAnimation {
+            navigationManager.navigate(to: .home)
+        }
     }
 }
 
 #Preview {
     OnboardingView()
+        .environmentObject(NavigationManager.shared)
 }
