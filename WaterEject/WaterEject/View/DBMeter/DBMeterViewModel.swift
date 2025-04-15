@@ -14,6 +14,8 @@ class DBMeterViewModel: ObservableObject {
     @Published var averageDB: Double = 0.0
     @Published var minDB: Double = 0.0
     @Published var maxDB: Double = 0.0
+    @Published var errorMessage: String?
+    @Published var showAlert = false
     
     private var audioRecorder: AVAudioRecorder?
     private var timer: Timer?
@@ -44,37 +46,81 @@ class DBMeterViewModel: ObservableObject {
         return 0.2 + (normalizedValue * 0.6)
     }
     
-    func startRecording() {
+    private func showMicrophonePermissionError() {
+        self.errorMessage = "Microphone access is required to measure sound levels. Please enable it in Settings to use this feature."
+        self.showAlert = true
+    }
+
+    func requestMicrophonePermission(completion: @escaping (Bool) -> Void) {
         let audioSession = AVAudioSession.sharedInstance()
         
-        do {
-            try audioSession.setCategory(.record, mode: .default)
-            try audioSession.setActive(true)
-            
-            let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("recording.wav")
-            let settings: [String: Any] = [
-                AVFormatIDKey: Int(kAudioFormatLinearPCM),
-                AVSampleRateKey: 44100.0,
-                AVNumberOfChannelsKey: 1,
-                AVLinearPCMBitDepthKey: 16,
-                AVLinearPCMIsBigEndianKey: false,
-                AVLinearPCMIsFloatKey: false
-            ]
-            
-            audioRecorder = try AVAudioRecorder(url: url, settings: settings)
-            audioRecorder?.isMeteringEnabled = true
-            audioRecorder?.record()
-            
-            isRecording = true
-            startMetering()
-            
-            premiumCheckTimer?.invalidate()
-            premiumCheckTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
-                self?.checkPremiumAndContinue()
+        switch audioSession.recordPermission {
+        case .granted:
+            completion(true)
+        case .denied:
+            showMicrophonePermissionError()
+            completion(false)
+        case .undetermined:
+            audioSession.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        completion(true)
+                    } else {
+                        self.showMicrophonePermissionError()
+                        completion(false)
+                    }
+                }
             }
+        @unknown default:
+            completion(false)
+        }
+    }
+    
+    func startRecording() {
+        requestMicrophonePermission { [weak self] granted in
+            guard let self = self else { return }
             
-        } catch {
-            print("Failed to start recording: \(error)")
+            guard granted else { return }
+            
+            let audioSession = AVAudioSession.sharedInstance()
+            
+            do {
+                try audioSession.setCategory(.record, mode: .default)
+                try audioSession.setActive(true)
+                
+                guard audioSession.availableInputs?.isEmpty == false else {
+                    self.errorMessage = "No microphone detected on this device."
+                    self.showAlert = true
+                    return
+                }
+                
+                let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("recording.wav")
+                let settings: [String: Any] = [
+                    AVFormatIDKey: Int(kAudioFormatLinearPCM),
+                    AVSampleRateKey: 44100.0,
+                    AVNumberOfChannelsKey: 1,
+                    AVLinearPCMBitDepthKey: 16,
+                    AVLinearPCMIsBigEndianKey: false,
+                    AVLinearPCMIsFloatKey: false
+                ]
+                
+                audioRecorder = try AVAudioRecorder(url: url, settings: settings)
+                audioRecorder?.isMeteringEnabled = true
+                audioRecorder?.record()
+                
+                isRecording = true
+                startMetering()
+                
+                premiumCheckTimer?.invalidate()
+                premiumCheckTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
+                    self?.checkPremiumAndContinue()
+                }
+                
+            } catch {
+                print("Failed to start recording: \(error)")
+                self.errorMessage = "Failed to start recording: \(error.localizedDescription)"
+                self.showAlert = true
+            }
         }
     }
     

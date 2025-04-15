@@ -114,6 +114,18 @@ struct DBMeterView: View {
         .onDisappear {
             viewModel.stopRecording()
         }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(
+                title: Text("Microphone Access Required"),
+                message: Text(viewModel.errorMessage ?? "Unknown error occurred"),
+                primaryButton: .default(Text("Open Settings")) {
+                    if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(settingsUrl)
+                    }
+                },
+                secondaryButton: .cancel(Text("Cancel"))
+            )
+        }
     }
 }
 
