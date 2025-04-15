@@ -12,6 +12,7 @@ struct NavigationHost<Content: View>: View {
     @State private var showingSettings = false
     @State private var isPaywallVisible = false
     private let paywall: PaywallRepository = .shared
+    private let navigationManager : NavigationManager = .shared
     let title: String
     let content: Content
     
@@ -68,6 +69,7 @@ struct NavigationHost<Content: View>: View {
                         }
                     }
                 }
+
                 .sheet(isPresented: $showingSettings) {
                     SettingsView()
                 }

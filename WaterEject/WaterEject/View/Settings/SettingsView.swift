@@ -7,16 +7,28 @@
 
 import Foundation
 import SwiftUI
+import StoreKit
+import AlertKit
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
+    private let paywallRepository = PaywallRepository.shared
     
     var body: some View {
         NavigationView {
             List {
                 Section {
                     Button(action: {
-                        // Premium action
+                        Task {
+                            await paywallRepository.openPaywallIfEnabled(
+                                action: .premium,
+                                isNotVisibleAction: nil,
+                                onCloseAction: nil,
+                                willOpenADS: nil,
+                                onPurchaseSuccess: {},
+                                onRestoreSuccess: {}
+                            )
+                        }
                     }) {
                         HStack {
                             Label("Get Premium", systemImage: "crown.fill")
@@ -30,27 +42,45 @@ struct SettingsView: View {
                 
                 Section {
                     Button(action: {
-                        // Share action
+                        guard let url = URL(string: "https://apps.apple.com/app/id123456789") else { return }
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            SKStoreReviewController.requestReview(in: windowScene)
+                        }
                     }) {
-                        Label("Share App", systemImage: "square.and.arrow.up")
+                        Label("Rate Us", systemImage: "star.fill")
                     }
                     
                     Button(action: {
-                        // Rate action
+                        guard let url = URL(string: "https://apps.apple.com/app/id123456789") else { return }
+                        let activityVC = UIActivityViewController(
+                            activityItems: ["Check out this awesome app!", url],
+                            applicationActivities: nil
+                        )
+                        
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let window = windowScene.windows.first,
+                           let rootVC = window.rootViewController {
+                            activityVC.popoverPresentationController?.sourceView = rootVC.view
+                            rootVC.present(activityVC, animated: true)
+                        }
                     }) {
-                        Label("Rate Us", systemImage: "star.fill")
+                        Label("Share App", systemImage: "square.and.arrow.up")
                     }
                 }
                 
                 Section {
                     Button(action: {
-                        // Privacy action
+                        if let url = URL(string: Config.privacy) {
+                            UIApplication.shared.open(url)
+                        }
                     }) {
                         Label("Privacy Policy", systemImage: "hand.raised.fill")
                     }
                     
                     Button(action: {
-                        // Terms action
+                        if let url = URL(string: Config.terms) {
+                            UIApplication.shared.open(url)
+                        }
                     }) {
                         Label("Terms of Use", systemImage: "doc.text.fill")
                     }
@@ -58,7 +88,17 @@ struct SettingsView: View {
                 
                 Section {
                     Button(action: {
-                        // Restore action
+                        Task {
+                            do {
+                                try await AdaptyService.shared.restorePurchases()
+                            } catch {
+                                AlertKitAPI.present(
+                                    title: "Premium Not Found!",
+                                    style: .iOS17AppleMusic,
+                                    haptic: .error)
+                                print("Restore failed:", error)
+                            }
+                        }
                     }) {
                         Label("Restore Purchases", systemImage: "arrow.clockwise")
                     }
@@ -76,6 +116,7 @@ struct SettingsView: View {
                 }
             }
         }
+        .adaptyPaywall()
     }
 }
 

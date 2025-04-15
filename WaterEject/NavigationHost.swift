@@ -12,6 +12,7 @@ public enum NavigationState {
     case home
     case intro
     case paywall
+    case settings
 }
 
 public class NavigationManager: ObservableObject {

@@ -36,6 +36,8 @@ struct ContentView: View {
                 OnboardingView()
             case .paywall:
                 Color.clear
+            case .settings:
+                SettingsView()
             }
         }
         .animation(.default, value: navigationManager.currentState)
