@@ -13,46 +13,61 @@ struct ToneGeneratorView: View {
     @StateObject private var viewModel = ToneGeneratorViewModel()
     @GestureState private var dragOffset: CGFloat = 0
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    private var buttonWidth: CGFloat {
+        isPad ? 300 : 200
+    }
+    
+    private var buttonHeight: CGFloat {
+        isPad ? 60 : 50
+    }
+    
+    private var iconSize: CGFloat {
+        isPad ? 60 : 40
+    }
+    
     var body: some View {
         NavigationHost(title: "Tone Generator") {
-                    ZStack {
+            ZStack {
                 Color(uiColor: .systemBackground).edgesIgnoringSafeArea(.all)
                 
-                VStack(spacing: 30) {
+                VStack(spacing: isPad ? 50 : 30) {
                     Spacer()
                     
                     // Volume indicator
                     Image(systemName: "speaker.wave.3")
-                        .font(.system(size: 40))
+                        .font(.system(size: iconSize))
                         .foregroundColor(Color(uiColor: .label))
                         .padding()
                         .background(Color(uiColor: .secondarySystemBackground))
                         .clipShape(Circle())
                     
-                    // Remove duplicate frequency display and add gesture indicator
-                    HStack(spacing: 10) {
+                    HStack(spacing: isPad ? 15 : 10) {
                         Image(systemName: "arrow.up.and.down.circle.fill")
-                            .font(.system(size: 30))
+                            .font(.system(size: isPad ? 40 : 30))
                             .foregroundColor(Color(uiColor: .secondaryLabel))
                         
                         Text("\(Int(viewModel.currentFrequency))")
-                            .font(.system(size: 60, weight: .bold))
+                            .font(.system(size: isPad ? 80 : 60, weight: .bold))
                             .foregroundColor(viewModel.frequencyColor)
                         
                         Text("hz")
-                            .font(.title2)
+                            .font(isPad ? .title : .title2)
                             .foregroundColor(viewModel.frequencyColor)
                     }
                     
                     Text("Swipe up & down to\nadjust frequency")
+                        .font(isPad ? .title3 : .body)
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color(uiColor: .secondaryLabel))
                     
-                    // Updated wave visualization with proper clipping
                     ZStack {
                         Rectangle()
                             .fill(Color(uiColor: .systemBackground))
-                            .frame(height: 80)
+                            .frame(height: isPad ? 120 : 80)
                         
                         SineWaveView(
                             frequency: viewModel.currentFrequency,
@@ -64,28 +79,29 @@ struct ToneGeneratorView: View {
                     
                     Spacer()
 
-                    VStack(spacing: 16) {
+                    VStack(spacing: isPad ? 24 : 16) {
                         Button(action: {
                             viewModel.togglePlayback()
                         }) {
                             Text(viewModel.isPlaying ? "Stop" : "Start")
                                 .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(width: 200, height: 50)
+                                .font(isPad ? .title2 : .headline)
+                                .frame(width: buttonWidth, height: buttonHeight)
                                 .background(Color(uiColor: viewModel.isPlaying ? .systemRed : .systemBlue))
+                                .cornerRadius(buttonHeight / 2)
                         }
-                        .cornerRadius(25)
 
                         Text("Swipe up and down to adjust the frequency. Press start when you find your desired frequency.")
-                            .font(.caption)
+                            .font(isPad ? .body : .caption)
                             .multilineTextAlignment(.center)
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
                             .foregroundColor(Color(uiColor: .secondaryLabel))
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, isPad ? 60 : 20)
                     }
-                    .padding(.bottom, 20)
+                    .padding(.bottom, isPad ? 40 : 20)
                 }
+                .padding(.horizontal, isPad ? 40 : 20)
                 .gesture(
                     DragGesture()
                         .updating($dragOffset) { value, state, _ in

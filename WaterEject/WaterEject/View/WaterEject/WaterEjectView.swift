@@ -13,6 +13,26 @@ struct WaterEjectView: View {
     @StateObject private var viewModel = WaterEjectViewModel()
     @StateObject private var cleaningProgress = CleaningProgress.shared
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    private var circleSize: CGFloat {
+        isPad ? 400 : 200
+    }
+    
+    private var buttonWidth: CGFloat {
+        isPad ? 300 : 200
+    }
+    
+    private var buttonHeight: CGFloat {
+        isPad ? 60 : 50
+    }
+    
+    private var iconSize: CGFloat {
+        isPad ? 80 : 50
+    }
+    
     var body: some View {
         NavigationHost(title: "Speaker Cleaner") {
             VStack(spacing: 0) {
@@ -24,35 +44,35 @@ struct WaterEjectView: View {
                 // Progress indicator
                 ZStack {
                     Circle()
-                        .stroke(lineWidth: 20)
+                        .stroke(lineWidth: isPad ? 30 : 20)
                         .opacity(0.3)
                         .foregroundColor(Color.gray)
                     
                     Circle()
                         .trim(from: 0.0, to: viewModel.progress)
-                        .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+                        .stroke(style: StrokeStyle(lineWidth: isPad ? 30 : 20, lineCap: .round, lineJoin: .round))
                         .foregroundColor(Color.blue)
                         .rotationEffect(Angle(degrees: 270.0))
                         .animation(.linear(duration: 0.1), value: viewModel.progress)
                     
-                    VStack {
+                    VStack(spacing: isPad ? 20 : 10) {
                         Image(systemName: viewModel.isPlaying ? "speaker.wave.3.fill" : "speaker.wave.1.fill")
-                            .font(.system(size: 50))
+                            .font(.system(size: iconSize))
                             .foregroundColor(viewModel.isPlaying ? .blue : .gray)
                         
                         if !viewModel.currentPhase.isEmpty {
                             Text(viewModel.currentPhase)
-                                .font(.caption)
+                                .font(isPad ? .title3 : .caption)
                                 .foregroundColor(.gray)
                         }
                     }
                 }
-                .frame(width: 200, height: 200)
-                .padding(.top, 20)
+                .frame(width: circleSize, height: circleSize)
+                .padding(.vertical, isPad ? 60 : 20)
                 
-                Spacer()
+                Spacer(minLength: 0)
                 
-                VStack(spacing: 16) {
+                VStack(spacing: isPad ? 24 : 16) {
                     Button(action: {
                         if viewModel.isPlaying {
                             viewModel.stopSession()
@@ -62,21 +82,21 @@ struct WaterEjectView: View {
                     }) {
                         Text(viewModel.isPlaying ? "Stop" : "Start")
                             .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(width: 200, height: 50)
+                            .font(isPad ? .title2 : .headline)
+                            .frame(width: buttonWidth, height: buttonHeight)
                             .background(viewModel.isPlaying ? Color.red : Color.blue)
-                            .cornerRadius(25)
+                            .cornerRadius(buttonHeight / 2)
                     }
                     
                     Text("Note: This feature is designed to clean water from your speaker. For best results, please repeat several times.")
-                        .font(.caption)
+                        .font(isPad ? .body : .caption)
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(Color(uiColor: .secondaryLabel))
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, isPad ? 60 : 20)
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, isPad ? 40 : 20)
             }
             .onAppear {
                 // Push notifications için izin isteği

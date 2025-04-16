@@ -64,6 +64,7 @@
 		BCCFB60F2DAE81FA001E3B14 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60E2DAE81FA001E3B14 /* OneSignalFramework */; };
 		BCCFB6112DAE8238001E3B14 /* OnesignalLoadableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */; };
 		BCCFB6132DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */; };
+		BCCFB6182DB00AA2001E3B14 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCFB6172DB00AA2001E3B14 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,10 @@
 		BCCFB6042DAE81B3001E3B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnesignalLoadableStrategy.swift; sourceTree = "<group>"; };
 		BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BCCFB6142DB00A8E001E3B14 /* WaterEject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WaterEject.entitlements; sourceTree = "<group>"; };
+		BCCFB6152DB00A97001E3B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCCFB6172DB00AA2001E3B14 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BCCFB6192DB00AA8001E3B14 /* NotificationExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +153,7 @@
 				BCBEBC722D8890C90048C61D /* AdaptyUI in Frameworks */,
 				BCBEBC5A2D888D060048C61D /* FirebaseCrashlytics in Frameworks */,
 				BCCFB5DC2DA9371A001E3B14 /* KeychainSwift in Frameworks */,
+				BCCFB6182DB00AA2001E3B14 /* StoreKit.framework in Frameworks */,
 				BCBEBC6B2D888DE50048C61D /* AlertKit in Frameworks */,
 				BCBEBC582D888D060048C61D /* FirebaseCore in Frameworks */,
 				BCBEBC5C2D888D060048C61D /* FirebaseDatabase in Frameworks */,
@@ -176,6 +182,7 @@
 				BCBEBC2D2D82F7100048C61D /* WaterEject */,
 				BCCFB6012DAE81B3001E3B14 /* NotificationExtension */,
 				BCBEBC2C2D82F7100048C61D /* Products */,
+				BCCFB6162DB00AA2001E3B14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,6 +198,8 @@
 		BCBEBC2D2D82F7100048C61D /* WaterEject */ = {
 			isa = PBXGroup;
 			children = (
+				BCCFB6152DB00A97001E3B14 /* Info.plist */,
+				BCCFB6142DB00A8E001E3B14 /* WaterEject.entitlements */,
 				BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */,
 				BCCFB5992DA51ED4001E3B14 /* View */,
 				BCBEBC4E2D842E610048C61D /* Navigation */,
@@ -449,10 +458,19 @@
 		BCCFB6012DAE81B3001E3B14 /* NotificationExtension */ = {
 			isa = PBXGroup;
 			children = (
+				BCCFB6192DB00AA8001E3B14 /* NotificationExtension.entitlements */,
 				BCCFB6022DAE81B3001E3B14 /* NotificationService.swift */,
 				BCCFB6042DAE81B3001E3B14 /* Info.plist */,
 			);
 			path = NotificationExtension;
+			sourceTree = "<group>";
+		};
+		BCCFB6162DB00AA2001E3B14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFB6172DB00AA2001E3B14 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -766,6 +784,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WaterEject/WaterEject.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
@@ -774,6 +793,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D22C6472WN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WaterEject/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to measure sound levels.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -801,6 +821,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WaterEject/WaterEject.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
@@ -809,6 +830,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D22C6472WN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WaterEject/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to measure sound levels.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -833,6 +855,7 @@
 		BCCFB6092DAE81B3001E3B14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NotificationExtension/NotificationExtension.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -863,6 +886,7 @@
 		BCCFB60A2DAE81B3001E3B14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NotificationExtension/NotificationExtension.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

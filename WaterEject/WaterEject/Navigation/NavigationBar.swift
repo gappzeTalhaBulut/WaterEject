@@ -22,9 +22,10 @@ struct NavigationHost<Content: View>: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             content
                 .navigationTitle(title)
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack(spacing: 16) {
@@ -69,7 +70,6 @@ struct NavigationHost<Content: View>: View {
                         }
                     }
                 }
-
                 .sheet(isPresented: $showingSettings) {
                     SettingsView()
                 }

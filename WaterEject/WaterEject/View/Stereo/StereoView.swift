@@ -21,6 +21,18 @@ struct StereoView: View {
     private let appStorage = AppStorageManager()
     private let paywallRepository = PaywallRepository.shared
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    private var buttonWidth: CGFloat {
+        isPad ? 300 : 200
+    }
+    
+    private var buttonHeight: CGFloat {
+        isPad ? 60 : 50
+    }
+    
     private func startAutoTune() {
         // Önce mevcut timer'ı temizle
         autoTuneTimer?.invalidate()
@@ -207,7 +219,7 @@ struct StereoView: View {
                             Text(isPlaying ? "Stop" : "Start")
                                 .foregroundColor(.white)
                                 .font(.headline)
-                                .frame(width: 200, height: 50)
+                                .frame(width: buttonWidth, height: buttonHeight)
                                 .background(isPlaying ? Color.red : Color.blue)
                                 .cornerRadius(25)
                         }
