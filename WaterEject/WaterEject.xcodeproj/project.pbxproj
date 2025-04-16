@@ -63,6 +63,7 @@
 		BCCFB60D2DAE81FA001E3B14 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60C2DAE81FA001E3B14 /* OneSignalExtension */; };
 		BCCFB60F2DAE81FA001E3B14 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60E2DAE81FA001E3B14 /* OneSignalFramework */; };
 		BCCFB6112DAE8238001E3B14 /* OnesignalLoadableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */; };
+		BCCFB6132DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		BCCFB6022DAE81B3001E3B14 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		BCCFB6042DAE81B3001E3B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnesignalLoadableStrategy.swift; sourceTree = "<group>"; };
+		BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 		BCBEBC2D2D82F7100048C61D /* WaterEject */ = {
 			isa = PBXGroup;
 			children = (
+				BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */,
 				BCCFB5992DA51ED4001E3B14 /* View */,
 				BCBEBC4E2D842E610048C61D /* Navigation */,
 				BCCFB5D22DA935E1001E3B14 /* Loadable */,
@@ -559,6 +562,7 @@
 				BCBEBC362D82F7120048C61D /* Preview Assets.xcassets in Resources */,
 				BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */,
 				BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */,
+				BCCFB6132DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy in Resources */,
 				BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -762,10 +766,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterEject/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D22C6472WN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to measure sound levels.";
@@ -782,6 +788,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Water Main";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -794,10 +801,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterEject/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D22C6472WN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to measure sound levels.";
@@ -814,6 +823,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Water Main";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -823,9 +833,11 @@
 		BCCFB6092DAE81B3001E3B14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D22C6472WN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationExtension;
@@ -840,6 +852,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app.NotificationExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Water Notif";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -850,9 +863,11 @@
 		BCCFB60A2DAE81B3001E3B14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D22C6472WN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationExtension;
@@ -867,6 +882,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app.NotificationExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Water Notif";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

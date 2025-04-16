@@ -137,14 +137,36 @@ final class AdaptyService: ObservableObject {
         }
     }
     
+    @MainActor
     func handlePaywallAction(_ action: AdaptyUI.Action, paywall: AdaptyPaywall) {
         switch action {
         case .close:
             hidePaywall()
         case .openURL(let url):
-            UIApplication.shared.open(url, options: [:])
+            Task {
+                if url.scheme == nil {
+                    // URL'de scheme yoksa https ekle
+                    if let modifiedUrl = URL(string: "https://\(url.absoluteString)") {
+                        await openURL(modifiedUrl)
+                    }
+                } else {
+                    await openURL(url)
+                }
+            }
         case .custom:
             break
+        }
+    }
+    
+    private func openURL(_ url: URL) async {
+        if await UIApplication.shared.canOpenURL(url) {
+            do {
+                try await UIApplication.shared.open(url)
+            } catch {
+                print("Failed to open URL: \(error.localizedDescription)")
+            }
+        } else {
+            print("Cannot open URL: \(url)")
         }
     }
     
