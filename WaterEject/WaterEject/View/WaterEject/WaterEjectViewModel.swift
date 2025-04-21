@@ -127,14 +127,16 @@ class WaterEjectViewModel: ObservableObject {
     }
     
     func stopSession() {
-        progressTimer?.invalidate()
-        progressTimer = nil
-        premiumCheckTimer?.invalidate()
-        premiumCheckTimer = nil
-        isPlaying = false
-        progress = 0.0
-        currentPhase = ""
-        audioEngine.stopPlayback()
+        DispatchQueue.main.async {
+            self.progressTimer?.invalidate()
+            self.progressTimer = nil
+            self.premiumCheckTimer?.invalidate()
+            self.premiumCheckTimer = nil
+            self.isPlaying = false
+            self.progress = 0.0
+            self.currentPhase = ""
+            self.audioEngine.stopPlayback()
+        }
     }
     
     deinit {
