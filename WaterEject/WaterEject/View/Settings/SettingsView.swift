@@ -29,14 +29,12 @@ struct SettingsView: View {
                 return
             }
             
-            // Recursively find the topmost presented view controller
             var topController = window.rootViewController
             while let presentedVC = topController?.presentedViewController {
                 topController = presentedVC
             }
             
             if let topController = topController {
-                // For iPad
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     activityVC.popoverPresentationController?.sourceView = topController.view
                     activityVC.popoverPresentationController?.sourceRect = CGRect(
@@ -134,6 +132,16 @@ struct SettingsView: View {
                         }
                     }) {
                         Label("Restore Purchases", systemImage: "arrow.clockwise")
+                    }
+                    
+                    Button(action: {
+                        UIPasteboard.general.string = Config.UDID
+                        AlertKitAPI.present(
+                            title: "User ID Copied!",
+                            style: .iOS17AppleMusic,
+                            haptic: .success)
+                    }) {
+                        Label("User ID", systemImage: "doc.on.doc.fill")
                     }
                 }
             }
