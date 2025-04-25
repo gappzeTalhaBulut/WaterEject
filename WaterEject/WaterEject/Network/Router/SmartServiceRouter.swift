@@ -15,7 +15,7 @@ enum SmartServiceRouter: NetworkEndpointConfiguration {
     }
     
     var path: String {
-        return  ""
+        return AppConfig.serURL + "/appOpen"
     }
     
     var parametersBody: Data? {
@@ -39,16 +39,15 @@ enum SmartServiceRouter: NetworkEndpointConfiguration {
                 "adaptyID": AppConfig.adaptyID,
                 "isTest": AppConfig.isTest,
             ]
-            debugPrint(body)
+            debugPrint("AppOpen Request Body:", body)
             return body.convert()
-           
         }
     }
     
     var headers: [String : String] {
         return [
             "Content-Type": "application/json",
-            "Authorization": "Bearer"
+            "Authorization": "Bearer \(AppConfig.smartServiceToken)"
         ]
     }
     
@@ -56,10 +55,18 @@ enum SmartServiceRouter: NetworkEndpointConfiguration {
         return 10
     }
 }
+
 extension Dictionary where Key == String, Value == Any {
     func convert() -> Data? {
-        guard let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted) else { return  nil }
-        guard let json = String(data: data, encoding: .utf8) else { return nil}
-        return json.data(using: .utf8)
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: self, options: [])
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                debugPrint("Converted JSON:", jsonString)
+            }
+            return jsonData
+        } catch {
+            debugPrint("JSON Conversion Error:", error)
+            return nil
+        }
     }
 }

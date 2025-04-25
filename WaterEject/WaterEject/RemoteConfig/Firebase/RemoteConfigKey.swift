@@ -8,7 +8,7 @@
 import Foundation
 
 enum FireBaseRemoteConfigKey: String, CaseIterable, ConfigKey {
-    case serUrl
+    case smartServiceURL
     case appOpen
     case privacy
     case terms
@@ -36,7 +36,7 @@ enum FireBaseRemoteConfigKey: String, CaseIterable, ConfigKey {
     
     var offline: Any {
         switch self {
-        case .serUrl:
+        case .smartServiceURL:
             return ""
         case .privacy:
             return ""

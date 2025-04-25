@@ -98,7 +98,7 @@ struct SplashView: View {
     
     private func setupRemoteConfig() {
         remoteConfig.didGetConfig = { [self] in
-            AppConfig.serURL = remoteConfig.string(for: FireBaseRemoteConfigKey.serUrl)
+            AppConfig.serURL = remoteConfig.string(for: FireBaseRemoteConfigKey.smartServiceURL)
             AppConfig.errorWebhook = remoteConfig.string(for: FireBaseRemoteConfigKey.errorWebhook)
             AppConfig.eventService = remoteConfig.string(for: FireBaseRemoteConfigKey.eventsUrl)
             AppConfig.apiKey = remoteConfig.string(for: FireBaseRemoteConfigKey.apiKey)

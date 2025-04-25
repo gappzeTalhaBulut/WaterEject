@@ -27,13 +27,14 @@ enum AppConfig {
     static var narrateLimit = 3
     static var googleKey = ""
     static var proxy: String = ""
+    static var smartServiceToken = "YNUZ0OUVHQKZVDUSVTSPOU83GKDLX4ED"
 
     // Uygulamada geliştirme yaparken bu flag true olarak kalıcak ki boşuna event servise istek gitmesin
     static var isTest: Bool = false
     /// Backend versiyonu için kullanılacak.
-    static let version = "2"
+    static let version = "11"
     /// Uygulama içi satınalma SDK ' sının versiyonu olucak.
-    static let paywallVersion = "1"
+    static let paywallVersion = "2"
     /// adapty id
     ///
     static var adaptyID: String = ""

@@ -23,12 +23,14 @@ final class PaywallRepository: ObservableObject {
     private var onPaywallCloseAction: (() -> Void)?
     private var onPaywallPurchaseSuccess: (() -> Void)?
     private var onPaywallRestoreSuccess: (() -> Void)?
+    private var isNotVisiblePaywall: (() -> Void)?
     private var currentPlacementId: String?
+    private var currentExpId: Int?
+    private var currentActionId: Int?
     private var currentAction: AppPaywallAction?
     
     private var cancellables = Set<AnyCancellable>()
     
-    // APPLY-CHANGE: Update the init method to use getSharedAdaptyService()
     private init(network: NetworkProtocol = NetworkService(),
                  paywallService: AdaptyService? = nil,
                  appStorage: AppStorageManager = AppStorageManager(),
@@ -63,7 +65,7 @@ final class PaywallRepository: ObservableObject {
                 self.response = result
                 Config.isAdsActive = result.isAdsActive ?? true
             }
-            return result.isPremium
+            return result.isPremium ?? false
             
         } catch {
             debugPrint("Smart Service Don't fetched -> \(error)")
@@ -90,7 +92,7 @@ final class PaywallRepository: ObservableObject {
                 self.response = result
                 Config.isAdsActive = result.isAdsActive ?? true
             }
-            return result.isPremium
+            return result.isPremium ?? false
             
         } catch {
             print("Both service and remote config failed: \(error)")
@@ -115,12 +117,14 @@ final class PaywallRepository: ObservableObject {
         action: AppPaywallAction,
         isNotVisibleAction: (() -> ())? = nil,
         onCloseAction: (() async -> ())? = nil,
-        willOpenADS: ((String) -> ())? = nil,
+        willOpenADS: ((Int) -> ())? = nil,
         onPurchaseSuccess: @escaping () -> (),
         onRestoreSuccess: @escaping () -> ()
     ) async {
         // Clear any existing state first
         currentPlacementId = nil
+        currentExpId = nil
+        currentActionId = nil
         currentAction = nil
         onPaywallCloseAction = nil
         
@@ -132,6 +136,8 @@ final class PaywallRepository: ObservableObject {
         
         print("PaywallRepository - Opening paywall with action: \(action)")
         self.currentPlacementId = paywall.placementId
+        self.currentExpId = paywall.expId
+        self.currentActionId = paywall.actionId
         self.currentAction = action
         self.onPaywallCloseAction = {
             print("PaywallRepository - onPaywallCloseAction triggered")
@@ -147,6 +153,8 @@ final class PaywallRepository: ObservableObject {
         } catch {
             print("PaywallRepository - Failed to open paywall: \(error)")
             currentPlacementId = nil
+            currentExpId = nil
+            currentActionId = nil
             currentAction = nil
             onPaywallCloseAction = nil
             isNotVisibleAction?()
@@ -168,18 +176,20 @@ final class PaywallRepository: ObservableObject {
 extension PaywallRepository: AdaptyAnalyticsDelegate {
     func onPaywallOpen(paywallName: String, isABTest: Bool, abTestName: String) {
         Task {
-            guard let placementId = currentPlacementId,
+            guard let expId = currentExpId,
                   let action = currentAction else { return }
             
          //eventRepository.sendPaywallOpened(
-         //    placementId: placementId,
+         //    placementId: expId,
          //    action: action,
-         //    paywallName: paywallName,
-         //    isABTest: isABTest,
-         //    abTestName: abTestName,
-         //    unique: Config.UDID,
+         //    paywallId: 0,
          //    status: "Success",
-         //    errorLog: "nil"
+         //    errorDetail: "",
+         //    errorCode: "",
+         //    actionId: self.currentActionId ?? 0,
+         //    isABTest: isABTest,
+         //    paywallName: paywallName,
+         //    ABTestName: abTestName
          //)
         }
     }
@@ -192,27 +202,19 @@ extension PaywallRepository: AdaptyAnalyticsDelegate {
                           price: String,
                           priceSymbol: String) {
         Task {
-            guard let placementId = currentPlacementId,
+            guard let expId = currentExpId,
                   let action = currentAction else { return }
             
             appStorage.isPremium = true
             
           //  eventRepository.sendPurchaseSuccess(
           //      purchaseTransactionId: purchaseTransactionId,
-          //      placementId: placementId,
+          //      placementId: expId,
           //      action: action,
-          //      paywallName: paywallName,
-          //      isABTest: isABTest,
-          //      abTestName: abTestName,
+          //      paywallId: 0,
           //      productCode: productId,
-          //      unique: Config.UDID,
-          //      price: "\(priceSymbol + " " + price)")
-          //
-          //  eventRepository.sendPurchaseWebhook(
-          //      price: "\(priceSymbol + " " + price)",
-          //      Action: action,
-          //      product: productId,
-          //      placement: placementId)
+          //      actionId: self.currentActionId ?? 0
+          //  )
             
             onPaywallPurchaseSuccess?()
         }
@@ -227,19 +229,17 @@ extension PaywallRepository: AdaptyAnalyticsDelegate {
                          price: String,
                          priceSymbol: String) {
         Task {
-            guard let placementId = currentPlacementId,
+            guard let expId = currentExpId,
                   let action = currentAction else { return }
             
           // eventRepository.sendPurchaseFailed(
-          //     placementId: placementId,
+          //     placementId: expId,
           //     action: action,
-          //     paywallName: paywallName,
-          //     isABTest: isABTest,
-          //     abTestName: abTestName,
+          //     paywallId: 0,
           //     productCode: productCode,
           //     errorCode: errorCode,
           //     errorDetail: errorDetail,
-          //     unique: Config.UDID
+          //     actionId: self.currentActionId ?? 0
           // )
         }
     }
