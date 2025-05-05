@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC0BABF72DC90314001181CA /* AppOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0BABF62DC9030F001181CA /* AppOpenModel.swift */; };
 		BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */; };
 		BCBEBC312D82F7100048C61D /* WaterEjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC302D82F7100048C61D /* WaterEjectView.swift */; };
 		BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBEBC322D82F7120048C61D /* Assets.xcassets */; };
@@ -92,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC0BABF62DC9030F001181CA /* AppOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenModel.swift; sourceTree = "<group>"; };
 		BCBEBC2B2D82F7100048C61D /* WaterEject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterEject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectApp.swift; sourceTree = "<group>"; };
 		BCBEBC302D82F7100048C61D /* WaterEjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectView.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				BCCFB5B92DA86A4D001E3B14 /* AppOpenResponse.swift */,
+				BC0BABF62DC9030F001181CA /* AppOpenModel.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 			files = (
 				BCCFB5C82DA9302E001E3B14 /* AppConfig.swift in Sources */,
 				BCCFB5BA2DA86A4D001E3B14 /* AppOpenResponse.swift in Sources */,
+				BC0BABF72DC90314001181CA /* AppOpenModel.swift in Sources */,
 				BCCFB5A22DA55A8B001E3B14 /* StereoView.swift in Sources */,
 				BCCFB5CD2DA9338F001E3B14 /* LogHelper.swift in Sources */,
 				BCCFB5E32DAD17B9001E3B14 /* SevenDaysCleaningView.swift in Sources */,
@@ -804,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -841,7 +845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.water-eject.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -23,7 +23,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Task {
             await initializePayWall()
         }
-        
         return true
     }
     

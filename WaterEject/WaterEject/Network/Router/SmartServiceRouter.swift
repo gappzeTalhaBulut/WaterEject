@@ -8,7 +8,7 @@
 import Foundation
 
 enum SmartServiceRouter: NetworkEndpointConfiguration {
-    case appOpen
+    case appOpen(model: AppOpenModel)
     
     var method: HTTPMethodType {
         return .post
@@ -20,24 +20,26 @@ enum SmartServiceRouter: NetworkEndpointConfiguration {
     
     var parametersBody: Data? {
         switch self {
-        case .appOpen:
+        case .appOpen(let model):
             let body: [String: Any] = [
-                "version": AppConfig.version,
-                "paywallVersion": AppConfig.paywallVersion,
-                "appVersion": LogHelper.version,
-                "bundle": Config.bundleIdentifier,
-                "unique-id": Config.UDID,
-                "name": LogHelper.deviceName,
-                "model": LogHelper.deviceModel,
-                "language": LogHelper.deviceLang.uppercased(),
-                "country": LogHelper.deviceCountry.uppercased(),
-                "battery": LogHelper.deviceBatteryLevel,
-                "os": LogHelper.deviceOS,
-                "os-version": LogHelper.deviceOSVersion,
-                "wifi": LogHelper.deviceIp(type: .wifi),
-                "lte": LogHelper.deviceIp(type: .cellular),
-                "adaptyID": AppConfig.adaptyID,
-                "isTest": AppConfig.isTest,
+                "version": model.version,
+                "paywallVersion": model.paywallVersion,
+                "bundle": model.bundle,
+                "unique-id": model.uniqueId,
+                "name": model.name,
+                "model": model.model,
+                "lang": model.lang,
+                "country": model.country,
+                "battery": model.battery,
+                "os": model.os,
+                "os-version": model.osVersion,
+                "wifi": model.wifi,
+                "lte": model.lte,
+                "pushServiceClientId": model.pushServiceClientId,
+                "isTest": model.isTest,
+                "serviceType": model.serviceType,
+                "appVersion": model.appVersion,
+                "from": model.fromData()
             ]
             debugPrint("AppOpen Request Body:", body)
             return body.convert()

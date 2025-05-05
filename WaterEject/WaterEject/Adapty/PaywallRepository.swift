@@ -45,7 +45,8 @@ final class PaywallRepository: ObservableObject {
     func getAppOpenResponse() async -> Bool {
         do {
             let result: AppOpenResponse = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<AppOpenResponse, Error>) in
-                self.network.request(route: SmartServiceRouter.appOpen)
+                let model = AppOpenModel()
+                self.network.request(route: SmartServiceRouter.appOpen(model: model))
                     .sink { completion in
                         switch completion {
                         case .finished:
