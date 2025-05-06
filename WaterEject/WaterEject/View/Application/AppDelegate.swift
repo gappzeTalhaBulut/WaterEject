@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppTrackingTransparency
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -30,7 +31,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         do {
             try await AdaptyService.shared.initializeAdapty()
         } catch {
-            print("Failed to initialize Adapty:", error.localizedDescription)
+            print("Failed to initialize Adapty: \(error.localizedDescription)")
         }
     }
 }

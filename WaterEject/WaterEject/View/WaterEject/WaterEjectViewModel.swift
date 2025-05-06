@@ -5,8 +5,8 @@
 //  Created by Talha on 13.03.2025.
 //
 
-import Foundation
 import UIKit
+import AppTrackingTransparency
 
 class WaterEjectViewModel: ObservableObject {
     @Published var isPlaying = false
@@ -31,6 +31,25 @@ class WaterEjectViewModel: ObservableObject {
                 self?.isPlaying = false
                 self?.progress = 0.0
                 self?.currentPhase = ""
+            }
+        }
+    }
+    
+    func requestAppTrackingPermission() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .authorized:
+                    print("ATT Durumu: Yetkilendirildi (Authorized)")
+                case .denied:
+                    print("ATT Durumu: Reddedildi (Denied)")
+                case .notDetermined:
+                    print("ATT Durumu: Belirlenmedi (Not Determined)")
+                case .restricted:
+                    print("ATT Durumu: Kısıtlandı (Restricted)")
+                @unknown default:
+                    print("ATT Durumu: Bilinmiyor (Unknown)")
+                }
             }
         }
     }

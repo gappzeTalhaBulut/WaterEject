@@ -112,6 +112,9 @@ struct WaterEjectView: View {
                 let audioSession = AVAudioSession.sharedInstance()
                 try? audioSession.setActive(true)
                 MPVolumeView.setVolume(1.0)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.viewModel.requestAppTrackingPermission()
+                }
             }
         }
     }

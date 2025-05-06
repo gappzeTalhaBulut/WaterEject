@@ -34,6 +34,7 @@
 		BC0BAC2B2DC9FA4A001181CA /* 10.wav in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC0F2DC9FA4A001181CA /* 10.wav */; };
 		BC0BAC2C2DC9FA4A001181CA /* 15.wav in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC142DC9FA4A001181CA /* 15.wav */; };
 		BC0BAC2D2DC9FA4A001181CA /* 17.wav in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC162DC9FA4A001181CA /* 17.wav */; };
+		BC0BAC2F2DCA037F001181CA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC2E2DCA037E001181CA /* PrivacyInfo.xcprivacy */; };
 		BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */; };
 		BCBEBC312D82F7100048C61D /* WaterEjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC302D82F7100048C61D /* WaterEjectView.swift */; };
 		BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBEBC322D82F7120048C61D /* Assets.xcassets */; };
@@ -85,7 +86,6 @@
 		BCCFB60D2DAE81FA001E3B14 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60C2DAE81FA001E3B14 /* OneSignalExtension */; };
 		BCCFB60F2DAE81FA001E3B14 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = BCCFB60E2DAE81FA001E3B14 /* OneSignalFramework */; };
 		BCCFB6112DAE8238001E3B14 /* OnesignalLoadableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */; };
-		BCCFB6132DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */; };
 		BCCFB6182DB00AA2001E3B14 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCFB6172DB00AA2001E3B14 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +135,7 @@
 		BC0BAC172DC9FA4A001181CA /* 18.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 18.wav; sourceTree = "<group>"; };
 		BC0BAC182DC9FA4A001181CA /* 19.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 19.wav; sourceTree = "<group>"; };
 		BC0BAC192DC9FA4A001181CA /* 20.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 20.wav; sourceTree = "<group>"; };
+		BC0BAC2E2DCA037E001181CA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BCBEBC2B2D82F7100048C61D /* WaterEject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterEject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectApp.swift; sourceTree = "<group>"; };
 		BCBEBC302D82F7100048C61D /* WaterEjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectView.swift; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		BCCFB6022DAE81B3001E3B14 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		BCCFB6042DAE81B3001E3B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCCFB6102DAE8238001E3B14 /* OnesignalLoadableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnesignalLoadableStrategy.swift; sourceTree = "<group>"; };
-		BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BCCFB6142DB00A8E001E3B14 /* WaterEject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WaterEject.entitlements; sourceTree = "<group>"; };
 		BCCFB6152DB00A97001E3B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCCFB6172DB00AA2001E3B14 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -269,9 +269,9 @@
 		BCBEBC2D2D82F7100048C61D /* WaterEject */ = {
 			isa = PBXGroup;
 			children = (
+				BC0BAC2E2DCA037E001181CA /* PrivacyInfo.xcprivacy */,
 				BCCFB6152DB00A97001E3B14 /* Info.plist */,
 				BCCFB6142DB00A8E001E3B14 /* WaterEject.entitlements */,
-				BCCFB6122DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy */,
 				BCCFB5992DA51ED4001E3B14 /* View */,
 				BCBEBC4E2D842E610048C61D /* Navigation */,
 				BCCFB5D22DA935E1001E3B14 /* Loadable */,
@@ -669,12 +669,12 @@
 				BC0BAC282DC9FA4A001181CA /* 1.wav in Resources */,
 				BC0BAC292DC9FA4A001181CA /* 19.wav in Resources */,
 				BC0BAC2A2DC9FA4A001181CA /* 16.wav in Resources */,
+				BC0BAC2F2DCA037F001181CA /* PrivacyInfo.xcprivacy in Resources */,
 				BC0BAC2B2DC9FA4A001181CA /* 10.wav in Resources */,
 				BC0BAC2C2DC9FA4A001181CA /* 15.wav in Resources */,
 				BC0BAC2D2DC9FA4A001181CA /* 17.wav in Resources */,
 				BCCFB5DE2DA93932001E3B14 /* GoogleService-Info.plist in Resources */,
 				BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */,
-				BCCFB6132DAFF5A7001E3B14 /* PrivacyInfo.xcprivacy in Resources */,
 				BCCFB5A42DA56467001E3B14 /* music1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
