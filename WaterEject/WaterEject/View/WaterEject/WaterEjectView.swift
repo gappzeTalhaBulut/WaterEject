@@ -34,9 +34,10 @@ struct WaterEjectView: View {
     }
     
     var body: some View {
-        NavigationHost(title: "Speaker Cleaner") {
+        NavigationHost(title: "Cleaner") {
             VStack(spacing: 0) {
                 SevenDayCleaningView()
+                    .padding(.top)
                     .padding(.horizontal)
                     .padding(.bottom, 20)
                     .environmentObject(cleaningProgress)

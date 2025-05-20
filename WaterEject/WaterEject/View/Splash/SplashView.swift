@@ -64,7 +64,7 @@ struct SplashView: View {
     
     private func checkWhereToStart() async {
         let isPremium = await paywallRepository.getAppOpenResponse()
-        if isPremium {
+        if !isPremium {
             appStorage.isPremium = true
             navigateToHome()
         } else {

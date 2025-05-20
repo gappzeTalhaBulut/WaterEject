@@ -115,7 +115,7 @@ struct StereoView: View {
     }
     
     var body: some View {
-        NavigationHost(title: "Stereo Test") {
+        NavigationHost(title: "Stereo") {
             ZStack {
                 Color(UIColor.systemBackground)
                     .edgesIgnoringSafeArea(.all)

@@ -35,6 +35,7 @@
 		BC0BAC2C2DC9FA4A001181CA /* 15.wav in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC142DC9FA4A001181CA /* 15.wav */; };
 		BC0BAC2D2DC9FA4A001181CA /* 17.wav in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC162DC9FA4A001181CA /* 17.wav */; };
 		BC0BAC2F2DCA037F001181CA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BC0BAC2E2DCA037E001181CA /* PrivacyInfo.xcprivacy */; };
+		BC80772F2DDD15A100B4D520 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80772E2DDD159D00B4D520 /* UIColor+Ext.swift */; };
 		BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */; };
 		BCBEBC312D82F7100048C61D /* WaterEjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC302D82F7100048C61D /* WaterEjectView.swift */; };
 		BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBEBC322D82F7120048C61D /* Assets.xcassets */; };
@@ -136,6 +137,7 @@
 		BC0BAC182DC9FA4A001181CA /* 19.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 19.wav; sourceTree = "<group>"; };
 		BC0BAC192DC9FA4A001181CA /* 20.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 20.wav; sourceTree = "<group>"; };
 		BC0BAC2E2DCA037E001181CA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BC80772E2DDD159D00B4D520 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		BCBEBC2B2D82F7100048C61D /* WaterEject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterEject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectApp.swift; sourceTree = "<group>"; };
 		BCBEBC302D82F7100048C61D /* WaterEjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectView.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 		BCBEBC682D888D450048C61D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BC80772E2DDD159D00B4D520 /* UIColor+Ext.swift */,
 				BCCFB5A32DA56466001E3B14 /* music1.wav */,
 				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
 				BCCFB5CE2DA9340B001E3B14 /* UIDevice+Ext.swift */,
@@ -730,6 +733,7 @@
 				BCCFB5C52DA92FF3001E3B14 /* RemoteConfigProtocol.swift in Sources */,
 				BCBEBC532D844BA20048C61D /* SettingsView.swift in Sources */,
 				BCCFB6112DAE8238001E3B14 /* OnesignalLoadableStrategy.swift in Sources */,
+				BC80772F2DDD15A100B4D520 /* UIColor+Ext.swift in Sources */,
 				BCCFB5BF2DA92F83001E3B14 /* RemoteConfigKey.swift in Sources */,
 				BCCFB5D42DA935F2001E3B14 /* LoadableManager.swift in Sources */,
 			);

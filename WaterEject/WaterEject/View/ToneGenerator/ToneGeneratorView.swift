@@ -30,7 +30,7 @@ struct ToneGeneratorView: View {
     }
     
     var body: some View {
-        NavigationHost(title: "Tone Generator") {
+        NavigationHost(title: "Tone") {
             ZStack {
                 Color(uiColor: .systemBackground).edgesIgnoringSafeArea(.all)
                 

@@ -111,7 +111,6 @@ class AudioEngine: ObservableObject {
             try engine!.start()
             isSetup = true
             currentMode = mode
-            
         } catch {
             print("Failed to setup audio engine: \(error)")
         }

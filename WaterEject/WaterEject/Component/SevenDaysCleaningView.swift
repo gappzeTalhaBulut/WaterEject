@@ -37,24 +37,6 @@ struct SevenDayCleaningView: View {
         self.appStorage = appStorage
     }
     
-    private var backgroundGradient: LinearGradient {
-        let darkBlue = Color.blue.opacity(colorScheme == .dark ? 0.2 : 0.1)
-        let lightBlue = Color.blue.opacity(colorScheme == .dark ? 0.1 : 0.05)
-        return LinearGradient(
-            colors: [darkBlue, lightBlue],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-    }
-    
-    private var textColor: Color {
-        colorScheme == .dark ? .white : .primary
-    }
-    
-    private var subtitleColor: Color {
-        colorScheme == .dark ? .gray : .secondary
-    }
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Button(action: {
@@ -64,11 +46,11 @@ struct SevenDayCleaningView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("7-day cleaning Plan:")
                             .font(.headline)
-                            .foregroundColor(textColor)
+                            .foregroundColor(Color(uiColor: .titleColor))
                         
                         Text("Perform a complete cleaning by daily cleaning")
                             .font(.subheadline)
-                            .foregroundColor(subtitleColor)
+                            .foregroundColor(Color(uiColor: .textColor))
                     }
                     
                     Spacer()
@@ -90,7 +72,11 @@ struct SevenDayCleaningView: View {
             }
         }
         .padding(.vertical)
-        .background(backgroundGradient)
+        .background(
+            Image("seven")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        )
         .cornerRadius(12)
         .onAppear {
             loadDays()
