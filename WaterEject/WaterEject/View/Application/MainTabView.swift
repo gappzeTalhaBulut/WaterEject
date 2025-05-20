@@ -18,29 +18,30 @@ struct MainTabView: View {
                     Label("Cleaner", systemImage: "drop.fill")
                 }
                 .tag(0)
-                .symbolEffect(.bounce, options: .repeat(1), value: true)
             
             ToneGeneratorView()
                 .tabItem {
                     Label("Tone", systemImage: "waveform")
                 }
                 .tag(1)
-                .symbolEffect(.bounce, options: .repeat(1), value: true)
             
             DBMeterView()
                 .tabItem {
                     Label("dB Meter", systemImage: "mic.and.signal.meter.fill")
                 }
                 .tag(2)
-                .symbolEffect(.bounce, options: .repeat(1), value: true)
             
             StereoView()
                 .tabItem {
                     Label("Stereo", systemImage: "music.quarternote.3")
                 }
                 .tag(3)
-                .symbolEffect(.bounce, options: .repeat(1), value: true)
         }
+        .tint(Color(uiColor: .primary))
+        .toolbar(.visible, for: .tabBar)
+        .toolbarBackground(.black, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
+        .background(.black)
         .adaptyPaywall()
     }
 }

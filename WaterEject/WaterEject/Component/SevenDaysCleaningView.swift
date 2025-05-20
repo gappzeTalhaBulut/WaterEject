@@ -38,28 +38,42 @@ struct SevenDayCleaningView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
             Button(action: {
                 // İleride detay sayfasına yönlendirme yapılabilir
             }) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text("7-day cleaning Plan:")
-                            .font(.headline)
+                            .font(.system(size: 20, weight: .semibold))
+                            .fontWeight(.bold)
                             .foregroundColor(Color(uiColor: .titleColor))
                         
                         Text("Perform a complete cleaning by daily cleaning")
-                            .font(.subheadline)
+                            .font(.system(size: 14, weight: .regular))
                             .foregroundColor(Color(uiColor: .textColor))
+                            .lineLimit(1)
                     }
                     
                     Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(Color(uiColor: .textColor))
+                        .font(.system(size: 20, weight: .medium))
+                        .padding(.top, 4)
                 }
                 .padding(.horizontal)
+                .padding(.top, 10)
             }
             
+            Rectangle()
+                .fill(Color(uiColor: .cardBorder))
+                .frame(height: 1)
+                .padding(.vertical, 10)
+                .padding(.horizontal)
+            
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
+                HStack(spacing: 12) {
                     ForEach(days) { day in
                         DayCircleView(
                             day: day.day,
@@ -69,14 +83,16 @@ struct SevenDayCleaningView: View {
                     }
                 }
                 .padding(.horizontal)
+                .padding(.bottom, 10)
             }
         }
-        .padding(.vertical)
+        .padding(.vertical, 8)
         .background(
             Image("seven")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         )
+        .background(Color(uiColor: .cardBackground))
         .cornerRadius(12)
         .onAppear {
             loadDays()
@@ -212,7 +228,7 @@ struct DayCircleView: View {
     
     private var circleColor: Color {
         if isCompleted {
-            return colorScheme == .dark ? .blue : .blue.opacity(0.9)
+            return Color(uiColor: .primary)
         } else {
             return .clear
         }
@@ -220,35 +236,31 @@ struct DayCircleView: View {
     
     private var borderColor: Color {
         if isCompleted {
-            return colorScheme == .dark ? .white : .white
+            return Color(uiColor: .white)
         } else {
-            return colorScheme == .dark ? .gray.opacity(0.3) : .gray.opacity(0.4)
+            return Color(uiColor: .cardBorder)
         }
     }
     
     private var textColor: Color {
         if isCompleted {
-            return .white
+            return Color(uiColor: .titleColor)
         } else {
-            return colorScheme == .dark ? .gray : .gray.opacity(0.8)
+            return Color(uiColor: .textColor)
         }
     }
     
     var body: some View {
         ZStack {
             Circle()
-                .strokeBorder(borderColor, lineWidth: isCompleted ? 3 : 1)
+                .strokeBorder(borderColor, lineWidth: 3)
                 .background(Circle().fill(circleColor))
-                .frame(width: 40, height: 40)
-                //.shadow(color: isCompleted ? .blue.opacity(0.3) : .clear, radius: 4)
+                .frame(width: 44, height: 44)
             
-            VStack(spacing: 2) {
-                Text("\(day)")
-                    .foregroundColor(textColor)
-                    .font(.system(size: 16, weight: .bold))
-            }
+            Text("\(day)")
+                .foregroundColor(textColor)
+                .font(.system(size: 18, weight: .medium))
         }
-        .animation(.easeInOut(duration: 0.2), value: isCompleted)
     }
 }
 
