@@ -32,72 +32,73 @@ struct ToneGeneratorView: View {
     var body: some View {
         NavigationHost(title: "Tone") {
             ZStack {
-                Color(uiColor: .systemBackground).edgesIgnoringSafeArea(.all)
+                Color(red: 0.06, green: 0.11, blue: 0.19)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: isPad ? 50 : 30) {
                     Spacer()
                     
-                    // Volume indicator
-                    Image(systemName: "speaker.wave.3")
-                        .font(.system(size: iconSize))
-                        .foregroundColor(Color(uiColor: .label))
-                        .padding()
-                        .background(Color(uiColor: .secondarySystemBackground))
-                        .clipShape(Circle())
-                    
                     HStack(spacing: isPad ? 15 : 10) {
-                        Image(systemName: "arrow.up.and.down.circle.fill")
-                            .font(.system(size: isPad ? 40 : 30))
-                            .foregroundColor(Color(uiColor: .secondaryLabel))
+                        VStack(spacing: 8) {
+                            Image("arrow-up")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Color(uiColor: .cardBackground))
+                            
+                            Image("arrow-back")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Color(uiColor: .cardBackground))
+                        }
                         
                         Text("\(Int(viewModel.currentFrequency))")
-                            .font(.system(size: isPad ? 80 : 60, weight: .bold))
-                            .foregroundColor(viewModel.frequencyColor)
+                            .font(.system(size: isPad ? 120 : 80, weight: .bold))
+                            .foregroundColor(.white)
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                         
                         Text("hz")
-                            .font(isPad ? .title : .title2)
-                            .foregroundColor(viewModel.frequencyColor)
+                            .font(.system(size: isPad ? 40 : 30, weight: .bold))
+                            .foregroundColor(Color(uiColor: .textColor))
+                            .offset(y: isPad ? 50 : 35)
                     }
                     
-                    Text("Swipe up & down to\nadjust frequency")
+                    Text("~ Loud like a motorcycle revving.")
                         .font(isPad ? .title3 : .body)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Color(uiColor: .secondaryLabel))
+                        .foregroundColor(.gray)
                     
                     ZStack {
                         Rectangle()
-                            .fill(Color(uiColor: .systemBackground))
+                            .fill(Color.clear)
                             .frame(height: isPad ? 120 : 80)
                         
                         SineWaveView(
                             frequency: viewModel.currentFrequency,
-                            color: viewModel.frequencyColor,
+                            color: Color(uiColor: .primary),
                             viewModel: viewModel
                         )
                     }
                     .clipShape(Rectangle())
                     
+                    Text("This feature is designed to clean water from your speaker.\nFor best results, please repeat several times.")
+                        .font(isPad ? .body : .caption)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray)
+                        .padding(.top, 40)
+                    
                     Spacer()
 
-                    VStack(spacing: isPad ? 24 : 16) {
-                        Button(action: {
-                            viewModel.togglePlayback()
-                        }) {
-                            Text(viewModel.isPlaying ? "Stop" : "Start")
-                                .foregroundColor(.white)
-                                .font(isPad ? .title2 : .headline)
-                                .frame(width: buttonWidth, height: buttonHeight)
-                                .background(Color(uiColor: viewModel.isPlaying ? .systemRed : .systemBlue))
-                                .cornerRadius(buttonHeight / 2)
-                        }
-
-                        Text("Swipe up and down to adjust the frequency. Press start when you find your desired frequency.")
-                            .font(isPad ? .body : .caption)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .foregroundColor(Color(uiColor: .secondaryLabel))
-                            .padding(.horizontal, isPad ? 60 : 20)
+                    Button(action: {
+                        viewModel.togglePlayback()
+                    }) {
+                        Text(viewModel.isPlaying ? "Stop" : "Play Tone")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .bold))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 64)
+                            .background(Color(uiColor: .activeCTA))
+                            .cornerRadius(16)
+                            .padding(.horizontal, 10)
                     }
                     .padding(.bottom, isPad ? 40 : 20)
                 }

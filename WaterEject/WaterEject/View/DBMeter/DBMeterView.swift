@@ -17,7 +17,7 @@ struct DBMeterView: View {
     }
     
     private var gaugeSize: CGFloat {
-        isPad ? 400 : 280
+        isPad ? 400 : 260
     }
     
     private var buttonWidth: CGFloat {
@@ -34,99 +34,86 @@ struct DBMeterView: View {
     
     var body: some View {
         NavigationHost(title: "dB Meter") {
-            VStack(spacing: isPad ? 40 : 20) {
-                Spacer()
+            ZStack {
+                Color(red: 0.06, green: 0.11, blue: 0.19)
+                    .edgesIgnoringSafeArea(.all)
                 
-                // Main meter gauge
-                ZStack {
-                    Circle()
-                        .trim(from: 0.2, to: 0.8)
-                        .stroke(Color(uiColor: .systemGray4), lineWidth: isPad ? 35 : 25)
-                        .frame(width: gaugeSize, height: gaugeSize)
-                    
-                    Circle()
-                        .trim(from: 0.2, to: viewModel.gaugeValue)
-                        .stroke(
-                            AngularGradient(
-                                gradient: Gradient(colors: [
-                                    Color(uiColor: .systemBlue),
-                                    Color(uiColor: .systemGreen),
-                                    Color(uiColor: .systemYellow),
-                                    Color(uiColor: .systemOrange),
-                                    Color(uiColor: .systemRed)
-                                ]),
-                                center: .center,
-                                startAngle: .degrees(72),
-                                endAngle: .degrees(288)
-                            ),
-                            style: StrokeStyle(lineWidth: isPad ? 35 : 25, lineCap: .round)
-                        )
-                        .frame(width: gaugeSize, height: gaugeSize)
-                        .rotationEffect(.degrees(36))
-                    
-                    VStack {
-                        Text(String(format: "%.1f", viewModel.decibels))
-                            .font(.system(size: isPad ? 90 : 60, weight: .bold))
-                        Text("dB")
-                            .font(isPad ? .title : .title2)
-                            .foregroundColor(Color(uiColor: .secondaryLabel))
+                VStack(spacing: 0) {
+                    ZStack {
+                        // Background circle - full ring
+                        Circle()
+                            .stroke(Color(uiColor: .cardBackground).opacity(0.3), lineWidth: isPad ? 35 : 25)
+                            .frame(width: gaugeSize, height: gaugeSize)
+                        
+                        // Progress circle with gradient - only show if there's sound
+                        Circle()
+                            .trim(from: 0.0, to: min(1.0, CGFloat(viewModel.decibels / 120.0)))
+                            .stroke(
+                                AngularGradient(
+                                    gradient: Gradient(colors: [
+                                        .blue,
+                                        .green,
+                                        .yellow,
+                                        .orange,
+                                        .red,
+                                        .purple,
+                                        .blue
+                                    ]),
+                                    center: .center,
+                                    startAngle: .degrees(0),
+                                    endAngle: .degrees(360)
+                                ),
+                                style: StrokeStyle(lineWidth: isPad ? 35 : 25, lineCap: .round)
+                            )
+                            .frame(width: gaugeSize, height: gaugeSize)
+                            .rotationEffect(.degrees(-90))
+                        
+                        // Center values
+                        VStack(spacing: 4) {
+                            Text("\(Int(viewModel.decibels))")
+                                .font(.system(size: isPad ? 90 : 60, weight: .bold))
+                                .foregroundColor(.white)
+                            Text("dB")
+                                .font(.system(size: isPad ? 24 : 20))
+                                .foregroundColor(.gray)
+                        }
                     }
-                }
-                .padding(.top, isPad ? 60 : 40)
-                
-                HStack(spacing: isPad ? 60 : 40) {
-                    VStack {
-                        Text(String(format: "%.1f", viewModel.averageDB))
-                            .font(statsFont)
-                            .frame(width: isPad ? 90 : 60, height: isPad ? 45 : 30)
-                        Text("Average")
-                            .font(isPad ? .body : .caption)
-                            .foregroundColor(Color(uiColor: .secondaryLabel))
-                    }
+                    .padding(.top, 35)
                     
-                    VStack {
-                        Text(String(format: "%.1f", viewModel.minDB))
-                            .font(statsFont)
-                            .frame(width: isPad ? 90 : 60, height: isPad ? 45 : 30)
-                        Text("Min")
-                            .font(isPad ? .body : .caption)
-                            .foregroundColor(Color(uiColor: .secondaryLabel))
-                    }
+                    Spacer()
                     
-                    VStack {
-                        Text(String(format: "%.1f", viewModel.maxDB))
-                            .font(statsFont)
-                            .frame(width: isPad ? 90 : 60, height: isPad ? 45 : 30)
-                        Text("Max")
-                            .font(isPad ? .body : .caption)
-                            .foregroundColor(Color(uiColor: .secondaryLabel))
+                    // Stats row
+                    HStack(spacing: 30) {
+                        StatView(title: "Avg", value: viewModel.averageDB)
+                        StatView(title: "Min", value: viewModel.minDB)
+                        StatView(title: "Max", value: viewModel.maxDB)
                     }
-                }
-                .padding(.top, isPad ? 60 : 40)
-                
-                Spacer()
-                
-                VStack(spacing: isPad ? 24 : 16) {
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 30)
+                    
+                    Text("This feature is designed to clean water from your speaker.\nFor best results, please repeat several times.")
+                        .font(.system(size: 13, weight: .regular))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color(uiColor: .textColor))
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 30)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    // Start button
                     Button(action: {
                         viewModel.isRecording ? viewModel.stopRecording() : viewModel.startRecording()
                     }) {
-                        Text(viewModel.isRecording ? "Stop" : "Start")
-                            .font(isPad ? .title2 : .headline)
+                        Text(viewModel.isRecording ? "Stop" : "Start Meter")
                             .foregroundColor(.white)
-                            .frame(width: buttonWidth, height: buttonHeight)
-                            .background(viewModel.isRecording ? Color.red : Color.blue)
-                            .cornerRadius(buttonHeight / 2)
+                            .font(.system(size: 20, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 64)
+                            .background(Color(uiColor: .activeCTA))
+                            .cornerRadius(16)
+                            .padding(.horizontal, 16)
                     }
-
-                    Text("Tap the Start button to begin capturing the sound levels around you.")
-                        .font(isPad ? .body : .caption)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .foregroundColor(Color(uiColor: .secondaryLabel))
-                        .padding(.horizontal, isPad ? 60 : 20)
+                    .padding(.bottom, 30)
                 }
-                .padding(.bottom, isPad ? 40 : 20)
             }
         }
         .onDisappear {
@@ -134,9 +121,9 @@ struct DBMeterView: View {
         }
         .alert(isPresented: $viewModel.showAlert) {
             Alert(
-                title: Text("Microphone Access Required"),
-                message: Text(viewModel.errorMessage ?? "Unknown error occurred"),
-                primaryButton: .default(Text("Open Settings")) {
+                title: Text("Allow Microphone Access"),
+                message: Text("To play tones and eject water, we need access to your microphone. Don't worry — we never record or store any audio."),
+                primaryButton: .default(Text("Grant Access")) {
                     if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(settingsUrl)
                     }
@@ -144,6 +131,32 @@ struct DBMeterView: View {
                 secondaryButton: .cancel(Text("Cancel"))
             )
         }
+    }
+}
+
+// Stat komponenti
+struct StatView: View {
+    let title: String
+    let value: Double
+    
+    var body: some View {
+        VStack(spacing: 5) {
+            Text(title)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.gray)
+            
+            Text(String(format: "%.1f", value))
+                .font(.system(size: 32, weight: .bold))
+                .foregroundColor(.white)
+        }
+        .frame(width: 100, height: 100)
+        .frame(maxWidth: .infinity)
+        .background(Color(uiColor: .cardBackground))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color(uiColor: .cardBorder), lineWidth: 1)
+        )
+        .cornerRadius(12)
     }
 }
 
