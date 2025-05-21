@@ -12,6 +12,7 @@ import SwiftUI
 struct NavigationHost<Content: View>: View {
     @State private var showingSettings = false
     @State private var isPaywallVisible = false
+    @StateObject private var appStorage = AppStorageManager()
     private let paywall: PaywallRepository = .shared
     private let navigationManager : NavigationManager = .shared
     let title: String
@@ -34,45 +35,47 @@ struct NavigationHost<Content: View>: View {
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack(spacing: 10) {
-                            Button(action: {
-                                Task {
-                                    isPaywallVisible = true
-                                    await paywall.openPaywallIfEnabled(
-                                        action: .premium,
-                                        isNotVisibleAction: {
-                                            withAnimation {
-                                                isPaywallVisible = false
+                            if !appStorage.isPremium {
+                                Button(action: {
+                                    Task {
+                                        isPaywallVisible = true
+                                        await paywall.openPaywallIfEnabled(
+                                            action: .premium,
+                                            isNotVisibleAction: {
+                                                withAnimation {
+                                                    isPaywallVisible = false
+                                                }
+                                            },
+                                            onCloseAction: {
+                                                withAnimation {
+                                                    isPaywallVisible = false
+                                                }
+                                            },
+                                            onPurchaseSuccess: {
+                                                withAnimation {
+                                                    isPaywallVisible = false
+                                                }
+                                            },
+                                            onRestoreSuccess: {
+                                                withAnimation {
+                                                    isPaywallVisible = false
+                                                }
                                             }
-                                        },
-                                        onCloseAction: {
-                                            withAnimation {
-                                                isPaywallVisible = false
-                                            }
-                                        },
-                                        onPurchaseSuccess: {
-                                            withAnimation {
-                                                isPaywallVisible = false
-                                            }
-                                        },
-                                        onRestoreSuccess: {
-                                            withAnimation {
-                                                isPaywallVisible = false
-                                            }
-                                        }
-                                    )
+                                        )
+                                    }
+                                }) {
+                                    HStack(spacing: 8) {
+                                        Image("pre")
+                                            .font(.system(size: 17, weight: .heavy))
+                                        Text("Get PRO")
+                                            .font(.system(size: 17, weight: .heavy))
+                                            .foregroundColor(Color(uiColor: .titleColor))
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 10)
+                                    .background(Color(uiColor: .premium))
+                                    .cornerRadius(20)
                                 }
-                            }) {
-                                HStack(spacing: 8) {
-                                    Image("pre")
-                                        .font(.system(size: 17, weight: .heavy))
-                                    Text("Get PRO")
-                                        .font(.system(size: 17, weight: .heavy))
-                                        .foregroundColor(Color(uiColor: .titleColor))
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .background(Color(uiColor: .premium))
-                                .cornerRadius(20)
                             }
                             
                             Button(action: {

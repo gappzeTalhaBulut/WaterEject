@@ -79,6 +79,7 @@ struct SettingsView: View {
                         }) {
                             ModernSettingsRow(icon: "crown.fill", iconColor: .yellow, title: "Get Premium", showArrow: true)
                         }
+                        .background(Color(uiColor: .white).opacity(0.1))
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                         
                         VStack(alignment: .leading, spacing: 16) {
@@ -127,40 +128,35 @@ struct SettingsView: View {
                                 }) {
                                     ModernSettingsRow(icon: "hand.raised.fill", iconColor: .gray, title: "Privacy Policy", showArrow: true)
                                 }
+                                Button(action: {
+                                    Task {
+                                        do {
+                                            try await AdaptyService.shared.restorePurchases()
+                                        } catch {
+                                            AlertKitAPI.present(
+                                                title: "Premium Not Found!",
+                                                style: .iOS17AppleMusic,
+                                                haptic: .error)
+                                            print("Restore failed:", error)
+                                        }
+                                    }
+                                }) {
+                                    ModernSettingsRow(icon: "arrow.clockwise", iconColor: .blue, title: "Restore", showArrow: true)
+                                }
+                                
+                                Button(action: {
+                                    UIPasteboard.general.string = Config.UDID
+                                    AlertKitAPI.present(
+                                        title: "User ID Copied!",
+                                        style: .iOS17AppleMusic,
+                                        haptic: .success)
+                                }) {
+                                    ModernSettingsRow(icon: "doc.on.doc.fill", iconColor: .gray, title: "User ID", showArrow: true)
+                                }
                             }
-                            .background(Color(uiColor: .hgcb))
+                            .background(Color(uiColor: .white).opacity(0.1))
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                         }
-                        
-                        VStack(spacing: 0) {
-                            Button(action: {
-                                Task {
-                                    do {
-                                        try await AdaptyService.shared.restorePurchases()
-                                    } catch {
-                                        AlertKitAPI.present(
-                                            title: "Premium Not Found!",
-                                            style: .iOS17AppleMusic,
-                                            haptic: .error)
-                                        print("Restore failed:", error)
-                                    }
-                                }
-                            }) {
-                                ModernSettingsRow(icon: "arrow.clockwise", iconColor: .blue, title: "Restore", showArrow: true)
-                            }
-                            
-                            Button(action: {
-                                UIPasteboard.general.string = Config.UDID
-                                AlertKitAPI.present(
-                                    title: "User ID Copied!",
-                                    style: .iOS17AppleMusic,
-                                    haptic: .success)
-                            }) {
-                                ModernSettingsRow(icon: "doc.on.doc.fill", iconColor: .gray, title: "User ID", showArrow: true)
-                            }
-                        }
-                        .background(Color(uiColor: .white).opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 24)
