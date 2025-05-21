@@ -15,7 +15,7 @@ struct StereoView: View {
     @State private var isPlaying = false
     @State private var isAutoTuneEnabled = false
     @State private var autoTuneTimer: Timer?
-    @State private var currentAutoTuneState = 0 // 0: both, 1: left, 2: right
+    @State private var currentAutoTuneState = 0
     @State private var premiumCheckTimer: Timer?
     
     private let appStorage = AppStorageManager()
@@ -25,12 +25,164 @@ struct StereoView: View {
         UIDevice.current.userInterfaceIdiom == .pad
     }
     
-    private var buttonWidth: CGFloat {
-        isPad ? 300 : 200
-    }
-    
-    private var buttonHeight: CGFloat {
-        isPad ? 60 : 50
+    var body: some View {
+        NavigationHost(title: "Stereo") {
+            ZStack {
+                Color(red: 0.06, green: 0.11, blue: 0.19)
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack(spacing: 0) {
+                    // Speaker Controls
+                    HStack(spacing: 20) {
+                        // Left Speaker Column
+                        VStack(spacing: 12) {
+                            Button(action: {
+                                isLeftSpeakerActive.toggle()
+                                audioEngine.toggleLeftChannel(isActive: isLeftSpeakerActive)
+                            }) {
+                                Text(isLeftSpeakerActive ? "On" : "Off")
+                                    .foregroundColor(.white)
+                                    .frame(width: 80)
+                                    .padding(.vertical, 8)
+                                    .background(Color(uiColor: .activeCTA).opacity(isLeftSpeakerActive ? 1 : 0))
+                                    .cornerRadius(20)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color(uiColor: .cardBorder), lineWidth: 1)
+                                    )
+                            }
+                            
+                            Button(action: {
+                                isLeftSpeakerActive.toggle()
+                                audioEngine.toggleLeftChannel(isActive: isLeftSpeakerActive)
+                            }) {
+                                Image(systemName: "hifispeaker")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 150, height: 179)
+                                    .foregroundColor(isLeftSpeakerActive ? .white : .gray)
+                            }
+                            
+                            Text("Left")
+                                .foregroundColor(.gray)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 8)
+                                .background(Color(red: 0.12, green: 0.18, blue: 0.25))
+                                .cornerRadius(16)
+                        }
+                        
+                        Spacer()
+                        
+                        // Right Speaker Column
+                        VStack(spacing: 12) {
+                            Button(action: {
+                                isRightSpeakerActive.toggle()
+                                audioEngine.toggleRightChannel(isActive: isRightSpeakerActive)
+                            }) {
+                                Text(isRightSpeakerActive ? "On" : "Off")
+                                    .foregroundColor(.white)
+                                    .frame(width: 80)
+                                    .padding(.vertical, 8)
+                                    .background(Color(uiColor: .activeCTA).opacity(isRightSpeakerActive ? 1 : 0))
+                                    .cornerRadius(20)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color(uiColor: .cardBorder), lineWidth: 1)
+                                    )
+                            }
+                            
+                            Button(action: {
+                                isRightSpeakerActive.toggle()
+                                audioEngine.toggleRightChannel(isActive: isRightSpeakerActive)
+                            }) {
+                                Image(systemName: "hifispeaker")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 150, height: 179)
+                                    .foregroundColor(isRightSpeakerActive ? .white : .gray)
+                            }
+                            
+                            Text("Right")
+                                .foregroundColor(.gray)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 8)
+                                .background(Color(red: 0.12, green: 0.18, blue: 0.25))
+                                .cornerRadius(16)
+                        }
+                    }
+                    .padding(.top, 50)
+                    .padding(.horizontal, 16)
+                    
+                    Spacer()
+                    
+                    // Auto Tune Toggle
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("Auto Tune")
+                                .foregroundColor(.white)
+                                .font(.system(size: 17, weight: .semibold))
+                            Spacer()
+                            Toggle("", isOn: Binding(
+                                get: { isAutoTuneEnabled },
+                                set: { newValue in
+                                    isAutoTuneEnabled = newValue
+                                    if newValue {
+                                        if isPlaying {
+                                            startAutoTune()
+                                        }
+                                    } else {
+                                        stopAutoTune()
+                                    }
+                                }
+                            ))
+                            .tint(.blue)
+                        }
+                        
+                        Text("Cycle of alternating playback: both left & right")
+                            .font(.system(size: 13))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(16)
+                    .background(Color(red: 0.12, green: 0.18, blue: 0.25))
+                    .cornerRadius(16)
+                    .padding(.horizontal, 16)
+                    
+                    Spacer()
+                    
+                    // Bottom Content
+                    VStack(spacing: 20) {
+                        Text("This feature is designed to clean water from your speaker.\nFor best results, please repeat several times.")
+                            .font(.system(size: 13, weight: .regular))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color(uiColor: .textColor))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 10)
+                        
+                        Button(action: {
+                            if isPlaying {
+                                stopPlayback()
+                            } else {
+                                startPlayback()
+                            }
+                        }) {
+                            Text(isPlaying ? "Stop" : "Stereo Check")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20, weight: .bold))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 64)
+                                .background(Color(uiColor: .activeCTA))
+                                .cornerRadius(16)
+                        }
+                    }
+                    .padding(.horizontal, 13)
+                    .padding(.bottom, 30)
+                }
+            }
+        }
+        .onDisappear {
+            stopAutoTune()
+            stopPlayback()
+        }
     }
     
     private func startAutoTune() {
@@ -112,135 +264,6 @@ struct StereoView: View {
                 startPlayback()
             }
         )
-    }
-    
-    var body: some View {
-        NavigationHost(title: "Stereo") {
-            ZStack {
-                Color(UIColor.systemBackground)
-                    .edgesIgnoringSafeArea(.all)
-                
-                VStack(spacing: 40) {
-                    // Hoparlör durumu
-                    HStack(spacing: 100) {
-                        // Sol hoparlör durum metni
-                        Text(isLeftSpeakerActive ? "On" : "Off")
-                            .foregroundColor(isLeftSpeakerActive ? .blue : .gray)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 8)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(isLeftSpeakerActive ? Color.blue : Color.gray, lineWidth: 1)
-                            )
-                        
-                        // Sağ hoparlör durum metni
-                        Text(isRightSpeakerActive ? "On" : "Off")
-                            .foregroundColor(isRightSpeakerActive ? .blue : .gray)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 8)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(isRightSpeakerActive ? Color.blue : Color.gray, lineWidth: 1)
-                            )
-                    }
-                    .padding(.top)
-                    
-                    // Hoparlör ikonları
-                    HStack(spacing: 60) {
-                        // Sol hoparlör
-                        SpeakerView(isActive: isLeftSpeakerActive, isFlipped: false) {
-                            isLeftSpeakerActive.toggle()
-                            audioEngine.toggleLeftChannel(isActive: isLeftSpeakerActive)
-                        }
-                        
-                        // Sağ hoparlör
-                        SpeakerView(isActive: isRightSpeakerActive, isFlipped: true) {
-                            isRightSpeakerActive.toggle()
-                            audioEngine.toggleRightChannel(isActive: isRightSpeakerActive)
-                        }
-                    }
-                    
-                    // Kanal isimleri
-                    HStack(spacing: 60) {
-                        Text("Left Channel")
-                            .foregroundColor(.gray)
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 12)
-                            .background(Color(UIColor.secondarySystemBackground))
-                            .cornerRadius(20)
-                        
-                        Text("Right Channel")
-                            .foregroundColor(.gray)
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 12)
-                            .background(Color(UIColor.secondarySystemBackground))
-                            .cornerRadius(20)
-                    }
-                    
-                    // Auto Tune Toggle
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text("Auto Tune")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                            Spacer()
-                            Toggle("", isOn: Binding(
-                                get: { isAutoTuneEnabled },
-                                set: { newValue in
-                                    isAutoTuneEnabled = newValue
-                                    if newValue {
-                                        if isPlaying {
-                                            startAutoTune()
-                                        }
-                                    } else {
-                                        stopAutoTune()
-                                    }
-                                }
-                            ))
-                        }
-                        Text("Cycle of alternating playback: both, left, right")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(12)
-                    
-                    Spacer()
-                    
-                    VStack(spacing: 16) {
-                        Button(action: {
-                            if isPlaying {
-                                stopPlayback()
-                            } else {
-                                startPlayback()
-                            }
-                        }) {
-                            Text(isPlaying ? "Stop" : "Start")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(width: buttonWidth, height: buttonHeight)
-                                .background(isPlaying ? Color.red : Color.blue)
-                                .cornerRadius(25)
-                        }
-
-                        Text("Toggle the speakers to check if your device's stereo system is working properly. Enable Auto Tune for automatic channel switching.")
-                            .font(.caption)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .foregroundColor(Color(UIColor.secondaryLabel))
-                            .padding(.horizontal, 20)
-                    }
-                    .padding(.bottom, 20)
-                }
-                .padding()
-            }
-        }
-        .onDisappear {
-            stopAutoTune()
-            stopPlayback()
-        }
     }
 }
 

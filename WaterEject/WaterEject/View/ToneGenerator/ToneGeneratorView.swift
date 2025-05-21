@@ -39,6 +39,7 @@ struct ToneGeneratorView: View {
                                     .frame(width: 30, height: 30)
                                     .foregroundColor(Color(uiColor: .cardBackground))
                             }
+                            .offset(y: isPad ? 20 : 10)
                             .padding(.trailing, isPad ? 5 : 0)
                             
                             Text("\(Int(viewModel.currentFrequency))")

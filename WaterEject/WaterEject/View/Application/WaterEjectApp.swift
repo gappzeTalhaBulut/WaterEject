@@ -16,6 +16,7 @@ struct WaterEjectApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(navigationManager)
+                .preferredColorScheme(.dark)
         }
     }
 }

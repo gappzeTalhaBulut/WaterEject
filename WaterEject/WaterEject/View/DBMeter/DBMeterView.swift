@@ -43,7 +43,7 @@ struct DBMeterView: View {
                 VStack(spacing: 0) {
                     ZStack {
                         Circle()
-                            .stroke(Color(uiColor: .cardBackground).opacity(0.3), lineWidth: isPad ? 35 : 25)
+                            .stroke(Color(uiColor: .cardBackground).opacity(0.7), lineWidth: isPad ? 35 : 25)
                             .frame(width: gaugeSize, height: gaugeSize)
                         
                         Circle()
