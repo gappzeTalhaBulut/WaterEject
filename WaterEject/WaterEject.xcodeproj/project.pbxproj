@@ -38,6 +38,7 @@
 		BC80772F2DDD15A100B4D520 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80772E2DDD159D00B4D520 /* UIColor+Ext.swift */; };
 		BC8077312DDD2C5000B4D520 /* WaterEjectModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8077302DDD2C4700B4D520 /* WaterEjectModeView.swift */; };
 		BC8077332DDDFB2700B4D520 /* MicPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8077322DDDFB1E00B4D520 /* MicPermissionView.swift */; };
+		BC8077352DDE7C1F00B4D520 /* PremimCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8077342DDE7C1600B4D520 /* PremimCardView.swift */; };
 		BCBEBC2F2D82F7100048C61D /* WaterEjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */; };
 		BCBEBC312D82F7100048C61D /* WaterEjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEBC302D82F7100048C61D /* WaterEjectView.swift */; };
 		BCBEBC332D82F7120048C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBEBC322D82F7120048C61D /* Assets.xcassets */; };
@@ -142,6 +143,7 @@
 		BC80772E2DDD159D00B4D520 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		BC8077302DDD2C4700B4D520 /* WaterEjectModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectModeView.swift; sourceTree = "<group>"; };
 		BC8077322DDDFB1E00B4D520 /* MicPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicPermissionView.swift; sourceTree = "<group>"; };
+		BC8077342DDE7C1600B4D520 /* PremimCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremimCardView.swift; sourceTree = "<group>"; };
 		BCBEBC2B2D82F7100048C61D /* WaterEject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterEject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBEBC2E2D82F7100048C61D /* WaterEjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectApp.swift; sourceTree = "<group>"; };
 		BCBEBC302D82F7100048C61D /* WaterEjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEjectView.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 		BCBEBC682D888D450048C61D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BC8077342DDE7C1600B4D520 /* PremimCardView.swift */,
 				BC80772E2DDD159D00B4D520 /* UIColor+Ext.swift */,
 				BCCFB5A32DA56466001E3B14 /* music1.wav */,
 				BCBEBC3C2D82FB700048C61D /* AudioEngine.swift */,
@@ -730,6 +733,7 @@
 				BCCFB5E52DAE3EE7001E3B14 /* GeneralHelper.swift in Sources */,
 				BCCFB5D62DA9368A001E3B14 /* FirebaseLoadableStrategy.swift in Sources */,
 				BCCFB59C2DA51F59001E3B14 /* OnboardingView.swift in Sources */,
+				BC8077352DDE7C1F00B4D520 /* PremimCardView.swift in Sources */,
 				BCCFB5C12DA92FB4001E3B14 /* RemoteConfigManager.swift in Sources */,
 				BCCFB5D12DA93553001E3B14 /* AppDelegate.swift in Sources */,
 				BCCFB5A72DA866C7001E3B14 /* AdaptyService.swift in Sources */,
