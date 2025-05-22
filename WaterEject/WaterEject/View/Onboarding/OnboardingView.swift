@@ -89,7 +89,7 @@ struct OnboardingView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.blue)
-                        .cornerRadius(25)
+                        .cornerRadius(16)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 50)

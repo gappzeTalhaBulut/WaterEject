@@ -65,22 +65,24 @@ struct SettingsView: View {
                 
                 ScrollView {
                     VStack(spacing: 32) {
-                        Button(action: {
-                            Task {
-                                await paywallRepository.openPaywallIfEnabled(
-                                    action: .premium,
-                                    isNotVisibleAction: nil,
-                                    onCloseAction: nil,
-                                    willOpenADS: nil,
-                                    onPurchaseSuccess: {},
-                                    onRestoreSuccess: {}
-                                )
+                        if !appStorage.isPremium {
+                            Button(action: {
+                                Task {
+                                    await paywallRepository.openPaywallIfEnabled(
+                                        action: .premium,
+                                        isNotVisibleAction: nil,
+                                        onCloseAction: nil,
+                                        willOpenADS: nil,
+                                        onPurchaseSuccess: {},
+                                        onRestoreSuccess: {}
+                                    )
+                                }
+                            }) {
+                                ModernSettingsRow(icon: "crown.fill", iconColor: .yellow, title: "Get Premium", showArrow: true)
                             }
-                        }) {
-                            ModernSettingsRow(icon: "crown.fill", iconColor: .yellow, title: "Get Premium", showArrow: true)
+                            .background(Color(uiColor: .white).opacity(0.1))
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
                         }
-                        .background(Color(uiColor: .white).opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
                         
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Feedback")
