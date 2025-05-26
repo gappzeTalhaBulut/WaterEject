@@ -35,7 +35,7 @@ struct MicrophonePermissionRequestView: View {
                     .padding(.horizontal, 30)
 
                 Button(action: onGrantAccess) {
-                    Text("Grant Access")
+                    Text("Continue")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
