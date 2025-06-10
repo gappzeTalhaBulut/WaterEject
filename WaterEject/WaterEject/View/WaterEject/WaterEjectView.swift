@@ -12,6 +12,9 @@ import MediaPlayer
 struct WaterEjectView: View {
     @StateObject private var viewModel = WaterEjectViewModel()
     @StateObject private var cleaningProgress = CleaningProgress.shared
+    @State private var showSilentModeAlert = false
+    @State private var showVolumeAlert = false
+    @AppStorage("hasShownVolumeAlert") private var hasShownVolumeAlert = false
     
     private var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
@@ -118,11 +121,29 @@ struct WaterEjectView: View {
                     .foregroundColor(Color(uiColor: .secondaryLabel))
                     .padding(.horizontal, isPad ? 60 : 20)
                     .padding(.bottom)
-                
-                
             }
             .background(Color(uiColor: .background))
+            .alert("Notice", isPresented: $showSilentModeAlert) {
+                Button("OK") {
+                    // Set volume to maximum when user acknowledges
+                }
+            } message: {
+                Text("Your device is in silent mode. For the best experience, we recommend turning on sound and setting the volume to maximum.")
+            }
+            .alert("Volume Recommendation", isPresented: $showVolumeAlert) {
+                Button("OK") {
+                    // User acknowledges the volume recommendation
+                }
+            } message: {
+                Text("For the best water cleaning experience, please ensure your device volume is at maximum level and silent mode is turned off.")
+            }
             .onAppear {
+                // Show volume alert only once per app installation
+                if !hasShownVolumeAlert {
+                    showVolumeAlert = true
+                    hasShownVolumeAlert = true
+                }
+                
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                     if granted {
                         print("Notification permission granted")
@@ -132,8 +153,13 @@ struct WaterEjectView: View {
                 }
                 
                 let audioSession = AVAudioSession.sharedInstance()
-                try? audioSession.setActive(true)
-                MPVolumeView.setVolume(1.0)
+                do {
+                    try audioSession.setCategory(.playback, mode: .default, options: [])
+                    try audioSession.setActive(true)
+                } catch {
+                    print("Audio session error: \(error)")
+                }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.viewModel.requestAppTrackingPermission()
                 }
@@ -144,12 +170,4 @@ struct WaterEjectView: View {
 
 #Preview {
     WaterEjectView()
-}
-
-extension MPVolumeView {
-    static func setVolume(_ volume: Float) {
-        let volumeView = MPVolumeView()
-        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
-        slider?.value = volume
-    }
 }
